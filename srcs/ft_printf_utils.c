@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:07:27 by levasse           #+#    #+#             */
-/*   Updated: 2022/12/08 12:33:13 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/09 08:04:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	to_address(long long n)
 	return (i + 2);
 }
 
-
 int	to_hex(int n, int uppercase)
 {
 	char	*res;
@@ -49,7 +48,7 @@ int	to_hex(int n, int uppercase)
 	int		i;
 
 	base = "0123456789ABCDEF";
-	res = malloc(get_int_len(n) * sizeof(char) + 1);
+	res = malloc(get_len_int(n) * sizeof(char) + 1);
 	if (!res)
 		return (0);
 	i = 0;
@@ -97,11 +96,11 @@ void	revert_char(char *str)
 	}
 }
 
-int	get_int_len(int n)
+int	get_len_int(int n)
 {
 	if (n < 10)
 		return (1);
-	return (1 + get_int_len(n / 10));
+	return (1 + get_len_int(n / 10));
 }
 
 void	ft_put_unsigned_nbr_fd(unsigned int n, int fd)

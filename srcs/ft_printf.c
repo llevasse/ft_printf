@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/08 17:27:00 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/09 08:44:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,17 @@ int	print_var(char c, va_list args)
 	}
 	else if (c == 'd' || c == 'i')
 	{
-		size = va_arg(args, int);
-		ft_putnbr_fd(size, 1);
-		return (get_int_len(size));
+		str = ft_itoa(va_arg(args, int));
+		ft_putstr_fd(str, 1);
+		size = ft_strlen(str);
+		free(str);
+		return (size);
 	}
 	else if (c == 'u')
 	{
 		unsignedint = va_arg(args, unsigned int);
 		ft_put_unsigned_nbr_fd(unsignedint, 1);
-		return (get_int_len(unsignedint));
+		return (get_len_int(unsignedint));
 	}
 	else if (c == 'x')
 		return (to_hex(va_arg(args, int), 0));
@@ -84,17 +86,76 @@ int	print_var(char c, va_list args)
 	return (0);
 }
 
+/* #include <stdio.h>
 
-
-
-
-
-
-#include <stdio.h>
+#define INT_MAX INT32_MAX
+#define INT_MIN -INT32_MAX-1
+#define LONG_MAX __LONG_MAX__
+#define LONG_MIN -__LONG_MAX__-1L
+#define UINT_MAX INT32_MAX*2U+1U
+#define ULONG_MAX __LONG_MAX__*2UL+1UL
 
 int main()
 {
-	
+	int i;
+	i = ft_printf(" %d ", 0);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", -1);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", 1);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", 9);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", 10);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", 11);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", 15);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", 16);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", 17);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", 99);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", 100);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", 101);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", -9);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", -10);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", -11);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", -14);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", -15);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", -16);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", -99);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", -100);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", -101);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", INT_MAX);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", INT_MIN);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", LONG_MAX);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", LONG_MIN);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", UINT_MAX);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", ULONG_MAX);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d ", 9223372036854775807LL);
+	printf("(ft_printf : %i)\n", i);
+	i = ft_printf(" %d %d %d %d %d %d %d", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+	printf("(ft_printf : %i)\n", i);	
 }
 
 int	to_address(long long n)
@@ -104,9 +165,9 @@ int	to_address(long long n)
 	int		i;
 
 	if (n < 0)
-		return (ft_printf("0xffffffffffffffff"));
+		return (i = ft_printf("0xffffffffffffffff"));
 	if (n == 0)
-		return (ft_printf("(nil)"));
+		return (i = ft_printf("(nil)"));
 	base = "0123456789abcdef";
 	res = malloc(17 * sizeof(char));
 	if (!res)
@@ -133,7 +194,7 @@ int	to_hex(int n, int uppercase)
 	int		i;
 
 	base = "0123456789ABCDEF";
-	res = malloc(get_int_len(n) * sizeof(char) + 1);
+	res = malloc(get_len_int(n) * sizeof(char) + 1);
 	if (!res)
 		return (0);
 	i = 0;
@@ -182,6 +243,13 @@ void	revert_char(char *str)
 }
 
 int	get_int_len(int n)
+{
+	if (n < 10)
+		return (1);
+	return (1 + get_int_len(n / 10));
+}
+
+int	get_len_int(int n)
 {
 	if (n < 10)
 		return (1);
@@ -256,3 +324,84 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+
+char	*ft_itoa(int n)
+{
+	char	*res;
+	int		len_int;
+	int		is_neg;
+	long	long_n;
+
+	long_n = (long)n;
+	is_neg = 0;
+	if (long_n < 0)
+	{
+		is_neg = 1;
+		long_n = long_n * -1;
+	}
+	len_int = get_int_len(long_n);
+	res = malloc((len_int + 2) * sizeof(char));
+	if (!res)
+		return (NULL);
+	res[len_int] = '\0';
+	fill_res(res, len_int, long_n);
+	if (is_neg == 0)
+		return (res);
+	else
+		return (set_minus(res, len_int));
+}
+
+void	fill_res(char *res, int len_int, long n)
+{
+	int	i;
+
+	i = len_int - 1;
+	while (i > 0 && n > 9)
+	{
+		res[i] = n % 10 + '0';
+		n = n / 10;
+		i--;
+	}
+	res[0] = n + '0';
+}
+
+char	*set_minus(char *s, int len)
+{
+	char	*res;
+
+	res = malloc(len * sizeof(char) + 2);
+	if (!res)
+		return (NULL);
+	ft_memset(res, 0, len + 2);
+	res[0] = '-';
+	ft_strcat(res, s);
+	return (res);
+}
+
+void	ft_strcat(char *dst, const char *src)
+{
+	while (*dst)
+		dst++;
+	while (*src)
+	{
+		*dst++ = *src;
+		src++;
+	}
+	*dst = '\0';
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned int	i;
+	unsigned char	replace;
+
+	replace = (unsigned char) c;
+	i = 0;
+	while (i < len)
+	{
+		((unsigned char *)b)[i] = replace;
+		i++;
+	}
+	return (b);
+}
+ */
