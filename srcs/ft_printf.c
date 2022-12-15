@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/15 06:55:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:24:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	print_var(char c, va_list args)
 int main()
 {	
 	int i;
-	i = ft_printf(" %p %p", LONG_MIN, LONG_MAX);
+	i = ft_printf("%i", -1);
 	printf("(ft_printf : %i)\n", i);
 }
 
@@ -407,4 +407,5 @@ char	*ft_itoa_unsigned(unsigned int n)
 	res[len_int] = '\0';
 	fill_res(res, len_int, n);
 	return (res);
-} */
+}
+ */
