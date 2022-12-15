@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/09 08:44:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/10 17:44:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	print_var(char c, va_list args)
 	return (0);
 }
 
-/* #include <stdio.h>
+#include <stdio.h>
 
 #define INT_MAX INT32_MAX
 #define INT_MIN -INT32_MAX-1
@@ -404,4 +404,3 @@ void	*ft_memset(void *b, int c, size_t len)
 	}
 	return (b);
 }
- */
