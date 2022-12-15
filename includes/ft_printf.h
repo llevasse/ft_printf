@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/12 08:07:09 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/15 09:51:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	lower_str(char *str);
 int		to_hex(int n, int uppercase);
 int		to_hex_unsigned(unsigned int n, int uppercase);
 int		to_address(long long n);
+int		to_address_neg(unsigned long long n);
 char	*ft_itoa(int n);
 void	fill_res(char *res, int len_int, long n);
 char	*set_minus(char *s, int len);

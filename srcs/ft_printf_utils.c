@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:07:27 by levasse           #+#    #+#             */
-/*   Updated: 2022/12/13 07:07:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:55:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	to_address(long long n)
 	if (n < 0)
 		return (ft_printf("0xffffffffffffffff"));
 	if (n == 0)
-		return (ft_printf("(nil)"));
+		return (ft_printf("0x0"));
 	base = "0123456789abcdef";
 	res = malloc(17 * sizeof(char));
 	if (!res)

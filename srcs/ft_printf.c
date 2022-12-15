@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/15 07:24:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/15 10:00:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	print_var(char c, va_list args)
 	return (0);
 }
 
-/* #include <stdio.h>
+#include <stdio.h>
 #include <stdint.h>
 
 #define INT_MAX INT32_MAX
@@ -102,8 +102,12 @@ int	print_var(char c, va_list args)
 int main()
 {	
 	int i;
-	i = ft_printf("%i", -1);
-	printf("(ft_printf : %i)\n", i);
+	i = ft_printf("%p\n", (void *)-14523);
+	i = ft_printf("%p\n", (void *)LONG_MAX + 423856);
+	printf("LONG_MAX : %p\n", (void *)LONG_MAX);
+	printf("LONG_MIN : %p\n", (void *)LONG_MIN);
+	printf("LONG_MAX : %p\n", (void *)LONG_MAX);
+	printf("LONG_MIN : %p\n", (void *)LONG_MIN);
 }
 
 int	to_address(long long n)
@@ -115,22 +119,48 @@ int	to_address(long long n)
 	if (n == LONG_MIN)
 		return (ft_printf("0x8000000000000000"));
 	if (n < 0)
-		return (ft_printf("0xffffffffffffffff"));
+		return (to_address_neg((unsigned) n));
 	if (n == 0)
-		return (i = ft_printf("(nil)"));
+		return (ft_printf("0x0"));
 	base = "0123456789abcdef";
 	res = malloc(17 * sizeof(char));
 	if (!res)
 		return (0);
-	i = 0;
+	ft_memset(res, '0', 16);
+	res[0] = '8';
+	i = 15;
 	while (n > 0)
 	{
 		res[i] = base[n % 16];
 		n = n / 16;
-		i++;
+		i--;
 	}
-	res[i] = 0;
-	revert_char(res);
+	res[16] = 0;
+	ft_putstr_fd("0x", 1);
+	ft_putstr_fd(res, 1);
+	free (res);
+	return (i + 2);
+}
+
+int to_address_neg(unsigned long long n)
+{
+	char	*res;
+	char	*base;
+	int		i;
+
+	base = "0123456789abcdef";
+	res = malloc(17 * sizeof(char));
+	if (!res)
+		return (0);
+	ft_memset(res, 'f', 16);
+	i = 15;
+	while (n > 0)
+	{
+		res[i] = base[n % 16];
+		n = n / 16;
+		i--;
+	}
+	res[16] = 0;
 	ft_putstr_fd("0x", 1);
 	ft_putstr_fd(res, 1);
 	free (res);
@@ -322,7 +352,7 @@ char	*ft_itoa(int n)
 		long_n = long_n * -1;
 	}
 	len_int = get_int_len(long_n);
-	res = malloc((len_int + 2) * sizeof(char));
+	res = malloc((len_int + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
 	res[len_int] = '\0';
@@ -408,4 +438,3 @@ char	*ft_itoa_unsigned(unsigned int n)
 	fill_res(res, len_int, n);
 	return (res);
 }
- */
