@@ -6,28 +6,26 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:07:27 by levasse           #+#    #+#             */
-/*   Updated: 2022/12/15 07:55:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/16 08:42:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int	to_address(long long n)
+int	to_address(unsigned long long n)
 {
 	char	*res;
 	char	*base;
 	int		i;
 
-	if (n == -__LONG_MAX__ - 1L)
-		return (ft_printf("0x8000000000000000"));
-	if (n < 0)
-		return (ft_printf("0xffffffffffffffff"));
 	if (n == 0)
 		return (ft_printf("0x0"));
 	base = "0123456789abcdef";
 	res = malloc(17 * sizeof(char));
 	if (!res)
 		return (0);
+/* 	ft_memset(res, 'f', 16);
+	i = 15; */
 	i = 0;
 	while (n > 0)
 	{
@@ -36,8 +34,8 @@ int	to_address(long long n)
 		i++;
 	}
 	res[i] = 0;
-	revert_char(res);
 	ft_putstr_fd("0x", 1);
+	revert_char(res);
 	ft_putstr_fd(res, 1);
 	free (res);
 	return (i + 2);

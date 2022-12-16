@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/15 10:00:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/16 08:43:11 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	print_var(char c, va_list args)
 	else if (c == 'X')
 		return (to_hex(va_arg(args, int), 1));
 	else if (c == 'p')
-		return (to_address((long long)va_arg(args, unsigned long long)));
+		return (to_address((unsigned long long)va_arg(args, unsigned long long)));
 	return (0);
 }
 
@@ -99,73 +99,62 @@ int	print_var(char c, va_list args)
 #define UINT_MAX INT32_MAX*2U+1U
 #define ULONG_MAX __LONG_MAX__*2UL+1UL
 
-int main()
+/* int main()
 {	
 	int i;
-	i = ft_printf("%p\n", (void *)-14523);
-	i = ft_printf("%p\n", (void *)LONG_MAX + 423856);
-	printf("LONG_MAX : %p\n", (void *)LONG_MAX);
-	printf("LONG_MIN : %p\n", (void *)LONG_MIN);
-	printf("LONG_MAX : %p\n", (void *)LONG_MAX);
-	printf("LONG_MIN : %p\n", (void *)LONG_MIN);
+	i = ft_printf("((void *)-14523) : %p", (void *)-14523);
+	ft_printf(" (ft_printf : %i)\n", i);
+	i = ft_printf("((void *)LONG_MAX + 423856) : %p", (void *)LONG_MAX + 423856);
+	ft_printf(" (ft_printf : %i)\n", i);
+	i = ft_printf("((void *)ULONG_MAX) : %p", (void *)(ULONG_MAX));
+	ft_printf(" (ft_printf : %i)\n", i);
+	i = ft_printf("\"\" : %p", "");
+	ft_printf(" (ft_printf : %i)\n", i);
+		
+	
+ 	i = printf("((void *)-14523) : %p", (void *)-14523);
+	printf(" (printf : %i)\n", i);
+	i = printf("((void *)LONG_MAX + 423856) : %p", (void *)LONG_MAX + 423856);
+	printf(" (printf : %i)\n", i);
+	i = printf("((void *)ULONG_MAX) : %p", (void *)(ULONG_MAX));
+	printf(" (printf : %i)\n", i); 
+	i = printf("\"\" : %p", "");
+	printf(" (printf : %i)\n", i);
+	
+	
+	printf("\n\n\((void *)LONG_MAX) : %p\n", (void *)LONG_MAX);
+	printf("((void *)LONG_MIN) : %p\n", (void *)LONG_MIN);
 }
 
-int	to_address(long long n)
+int	to_address(unsigned long long n)
 {
 	char	*res;
 	char	*base;
 	int		i;
 
-	if (n == LONG_MIN)
-		return (ft_printf("0x8000000000000000"));
-	if (n < 0)
-		return (to_address_neg((unsigned) n));
 	if (n == 0)
 		return (ft_printf("0x0"));
 	base = "0123456789abcdef";
 	res = malloc(17 * sizeof(char));
 	if (!res)
 		return (0);
-	ft_memset(res, '0', 16);
-	res[0] = '8';
-	i = 15;
+// 	ft_memset(res, 'f', 16);
+//	i = 15; 
+	i = 0;
 	while (n > 0)
 	{
 		res[i] = base[n % 16];
 		n = n / 16;
-		i--;
+		i++;
 	}
-	res[16] = 0;
+	res[i] = 0;
 	ft_putstr_fd("0x", 1);
+	revert_char(res);
 	ft_putstr_fd(res, 1);
 	free (res);
 	return (i + 2);
 }
 
-int to_address_neg(unsigned long long n)
-{
-	char	*res;
-	char	*base;
-	int		i;
-
-	base = "0123456789abcdef";
-	res = malloc(17 * sizeof(char));
-	if (!res)
-		return (0);
-	ft_memset(res, 'f', 16);
-	i = 15;
-	while (n > 0)
-	{
-		res[i] = base[n % 16];
-		n = n / 16;
-		i--;
-	}
-	res[16] = 0;
-	ft_putstr_fd("0x", 1);
-	ft_putstr_fd(res, 1);
-	free (res);
-	return (i + 2);
-}
 
 int	to_hex(int n, int uppercase)
 {
@@ -438,3 +427,4 @@ char	*ft_itoa_unsigned(unsigned int n)
 	fill_res(res, len_int, n);
 	return (res);
 }
+ */
