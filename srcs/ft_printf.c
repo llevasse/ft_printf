@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/16 08:43:11 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:07:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	print_var(char c, va_list args)
 #define UINT_MAX INT32_MAX*2U+1U
 #define ULONG_MAX __LONG_MAX__*2UL+1UL
 
-/* int main()
+int main()
 {	
 	int i;
 	i = ft_printf("((void *)-14523) : %p", (void *)-14523);
@@ -427,4 +427,3 @@ char	*ft_itoa_unsigned(unsigned int n)
 	fill_res(res, len_int, n);
 	return (res);
 }
- */
