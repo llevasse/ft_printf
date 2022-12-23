@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/19 14:07:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:55:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	print_var(char c, va_list args)
 		return (to_address((unsigned long long)va_arg(args, unsigned long long)));
 	return (0);
 }
-
+/* 
 #include <stdio.h>
 #include <stdint.h>
 
@@ -427,3 +427,4 @@ char	*ft_itoa_unsigned(unsigned int n)
 	fill_res(res, len_int, n);
 	return (res);
 }
+ */
