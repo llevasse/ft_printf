@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2022/12/19 11:36:15 by llevasse         ###   ########.fr        #
+#    Updated: 2022/12/23 15:57:21 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ bonus:		fclean ${OBJS_BONUS}
 all:		${NAME}
 
 clean:
-				rm -f ${OBJS} {OBJS_BONUS} ${LIBFT_OBJS}
+				rm -f ${OBJS} ${OBJS_BONUS} ${LIBFT_OBJS}
 
 fclean:		clean
 				rm -f ${NAME}

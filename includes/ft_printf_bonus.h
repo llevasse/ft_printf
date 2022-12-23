@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/19 15:47:18 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/22 19:48:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int		print_var_0(const char *str, va_list args);
 int		print_var_0_d_or_i(va_list args, int min_print);
 int		print_var_0_u(va_list args, int min_print);
 int		print_var_0_hex(va_list args, int min_print, int uppercase);
+int		print_var_dot(const char *str, va_list args);
+int		print_var_dot_int(va_list args, int precision);
+int		print_var_dot_s(va_list args, int precision);
+int		print_var_dot_u(va_list args, int precision);
+int		print_var_dot_hex(va_list args, int precision, int uppercase);
 int		print_var_bonus(const char *str, va_list args);
 int		print_var(char str, va_list args);
 int		get_len_int(int n);
