@@ -6,10 +6,9 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/16 08:09:03 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/30 14:27:10 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
@@ -20,28 +19,24 @@
 # include <stddef.h>
 # include "../libft/libft.h"
 
-# define INT_MAX INT32_MAX
-# define INT_MIN -INT32_MAX-1
-# define LONG_MAX __LONG_MAX__
-# define LONG_MIN -__LONG_MAX__-1L
-# define UINT_MAX INT32_MAX*2U+1U
-# define ULONG_MAX __LONG_MAX__*2UL+1UL
-
 int		ft_printf(const char *string, ...);
+int		ft_putstr(char *str, int with_free);
+int		ft_putchar(char c);
 int		print_var(char c, va_list args);
-void	ft_put_unsigned_nbr_fd(unsigned int n, int fd);
-int		get_len_int(int n);
-void	revert_char(char *str);
-void	lower_str(char *str);
+int		get_int_len(int n);
 int		to_hex(int n, int uppercase);
 int		to_hex_unsigned(unsigned int n, int uppercase);
 int		to_address(unsigned long long n);
+int		get_unsigned_len(unsigned int n);
+int		is_specifier(char c);
 char	*ft_itoa(int n);
-void	fill_res(char *res, int len_int, long n);
 char	*set_minus(char *s, int len);
+char	*ft_itoa_unsigned(unsigned int n);
+void	fill_res(char *res, int len_int, long n);
 void	ft_strcat(char *dst, const char *src);
 void	*ft_memset(void *b, int c, size_t len);
-int		get_unsigned_len(unsigned int n);
-char	*ft_itoa_unsigned(unsigned int n);
+void	ft_put_unsigned_nbr_fd(unsigned int n, int fd);
+void	revert_char(char *str);
+void	lower_str(char *str);
 
 #endif

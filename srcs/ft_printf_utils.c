@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:07:27 by levasse           #+#    #+#             */
-/*   Updated: 2022/12/16 08:42:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2022/12/30 14:30:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	to_address(unsigned long long n)
 	res = malloc(17 * sizeof(char));
 	if (!res)
 		return (0);
-/* 	ft_memset(res, 'f', 16);
-	i = 15; */
 	i = 0;
 	while (n > 0)
 	{
@@ -50,7 +48,7 @@ int	to_hex(int n, int uppercase)
 	if (n < 0)
 		return (to_hex_unsigned((unsigned)n, uppercase));
 	base = "0123456789ABCDEF";
-	res = malloc(get_len_int(n) * sizeof(char) + 1);
+	res = malloc(get_int_len(n) * sizeof(char) + 1);
 	if (!res)
 		return (0);
 	i = 0;
@@ -66,9 +64,7 @@ int	to_hex(int n, int uppercase)
 	revert_char(res);
 	if (!uppercase)
 		lower_str(res);
-	ft_putstr_fd(res, 1);
-	i = ft_strlen(res);
-	free(res);
+	i = ft_putstr(res, 1);
 	return (i);
 }
 
@@ -126,43 +122,4 @@ void	revert_char(char *str)
 		str[len - i - 1] = temp;
 		i++;
 	}
-}
-
-int	get_len_int(int n)
-{
-	if (n < 10)
-		return (1);
-	return (1 + get_len_int(n / 10));
-}
-
-void	ft_put_unsigned_nbr_fd(unsigned int n, int fd)
-{
-	if (n < 10)
-		ft_putchar_fd(n + '0', fd);
-	else 
-	{
-		ft_put_unsigned_nbr_fd(n / 10, fd);
-		ft_putchar_fd(n % 10 + '0', fd);
-	}
-}
-
-int get_unsigned_len(unsigned n)
-{
-	if (n < 10)
-		return (1);
-	return (1 + get_unsigned_len(n / 10));
-}
-
-char	*ft_itoa_unsigned(unsigned int n)
-{
-	char	*res;
-	int		len_int;
-
-	len_int = get_unsigned_len(n);
-	res = malloc((len_int + 1) * sizeof(char));
-	if (!res)
-		return (NULL);
-	res[len_int] = '\0';
-	fill_res(res, len_int, n);
-	return (res);
 }
