@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2022/12/31 17:51:07 by llevasse         ###   ########.fr        #
+#    Updated: 2022/12/31 19:20:09 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ BONUS_FILES	= 	srcs/ft_printf_bonus.c \
 				srcs/ft_printf_utils_bonus_2_electric_bangaloo.c \
 				srcs/ft_printf_utils_bonus_field_min_and_minus.c \
 				srcs/ft_rewrite_put_fd_bonus.c
+
+DEBUG_FILES =	srcs/main.c
 
 
 LIBFT_FILES	= 	libft/ft_atoi.c \
@@ -62,6 +64,8 @@ LIBFT_FILES	= 	libft/ft_atoi.c \
 				libft/ft_strchr.c \
 				libft/ft_strdup.c
 
+EXECUTABLE	:= main
+
 OBJS		= ${FILES:.c=.o}
 
 LIBFT_OBJS	= ${LIBFT_FILES:.c=.o}
@@ -81,6 +85,7 @@ bonus:		fclean ${OBJS_BONUS}
 
 all:		${NAME}
 
+
 clean:
 				rm -f ${OBJS} ${OBJS_BONUS} ${LIBFT_OBJS}
 
@@ -88,5 +93,17 @@ fclean:		clean
 				rm -f ${NAME}
 
 re:			fclean all
+
+alldebug:	bin/$(EXECUTABLE)
+
+run: cleandebug alldebug
+	clear
+	./bin/$(EXECUTABLE)
+
+bin/$(EXECUTABLE): ${BONUS_FILES} ${DEBUG_FILES} ${LIBFT_FILES}
+	gcc -ggdb $^ -o $@ 
+
+cleandebug:
+	-rm bin/*
 
 .PHONY:		all	clean	fclean	re bonus

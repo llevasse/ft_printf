@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/31 17:47:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/01 00:27:57 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,16 @@ int	print_var_bonus(const char *str, va_list args)
 	int	min_print;
 
 	if (*str == '-')
-		return (print_var_minus(str, args));
+		return (print_var_minus(str + 1, args));
 	if (ft_isdigit(*str) && *str != '0')
 	{
 		min_print = ft_atoi(str);
 		while (!is_specifier_b(*str, 0))
+		{
+			if (*str == '.')
+				return (print_var_field_max(str + 1, args, min_print));
 			str++;
+		}
 		return (print_var_field_minimum(*str, args, min_print));
 	}
 	if (*str == '0')
@@ -97,6 +101,8 @@ int	is_specifier_b(char c, int is_bonus)
 		return (1);
 	if (is_bonus == 1 && (c == '-' || c == '.' \
 	|| c == '#' || c == ' ' || c == '+' || ft_isdigit(c)))
+		return (1);
+	if (is_bonus == 2 && (is_specifier_b(c, 0) || is_specifier_b(c, 1)))
 		return (1);
 	return (0);
 }
