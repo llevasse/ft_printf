@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:56:07 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/31 23:42:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/01 17:29:42 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,19 @@ int	print_var_dot(const char *str, va_list args)
 
 int	print_var_dot_s(va_list args, int precision)
 {
-	int		i;
-	char	*str_print;
+	int			i;
+	const char	*str_print;
 
 	i = 0;
 	if (precision == 0)
 		return (0);
 	str_print = va_arg(args, char *);
-	while (i < precision && str_print[i])
-	{
-		ft_putchar_fd(str_print[i], 1);
-		i++;
-	}
+	if (!str_print)
+		str_print = "(null)";
+	if (precision < 6 && !ft_strncmp(str_print, "(null)", 6))
+		precision = 0;
+	while (i < precision && *str_print)
+		i += ft_printf("%c", *str_print++);
 	return (i);
 }
 

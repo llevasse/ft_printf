@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:47:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/01 00:41:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/01 17:23:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,58 +35,62 @@ int	print_var_field_minimum(char c, va_list args, int min_print)
 	return (i + ft_printf("%s", str_to_print));
 }
 
-int	print_var_field_max(const char *str, va_list args, int max)
+int	print_var_field_max(const char *str, va_list args, int min)
 {
 	char	*str_to_print;
 	int		i;
+	int		j;
 	int		str_len;
-	int		len_print;
+	int		max_print;
 
-	len_print = ft_atoi(str++);
+	max_print = ft_atoi(str++);
 	if (*str == 's')
 	{
 		str_to_print = va_arg(args, char *);
 		if (!str_to_print)
-			str_len = 6;
-		else
-			str_len = ft_strlen(str_to_print);
+			str_to_print = "(null)";
+		str_len = ft_strlen(str_to_print);
 	}
-	if (str_len < len_print)
-		len_print = str_len;
 	i = 0;
-	while (i < (max - len_print))
+	if (str_len < max_print)
+		max_print = str_len;
+	else if (!ft_strncmp("(null)", str_to_print, str_len))
+		max_print = 0;
+	while (i < (min - max_print))
 		i += ft_printf(" ");
-	while (i < max && *str_to_print)
-		i += ft_printf("%c", *str_to_print++);
-	return (i);
+	j = 0;
+	while (j < max_print && *str_to_print)
+		j += ft_printf("%c", *str_to_print++);
+	return (i + j);
 }
 
-int	print_var_field_max_left(const char *str, va_list args, int max)
+
+int	print_var_field_max_left(const char *str, va_list args, int min)
 {
 	char	*str_to_print;
 	int		i;
 	int		str_len;
-	int		len_print;
+	int		max_print;
 
-	len_print = ft_atoi(str++);
+	max_print = ft_atoi(str++);
 	if (*str == 's')
 	{
 		str_to_print = va_arg(args, char *);
 		if (!str_to_print)
-			str_len = 6;
-		else
-			str_len = ft_strlen(str_to_print);
+			str_to_print = "(null)";
+		str_len = ft_strlen(str_to_print);
 	}
-	if (str_len < len_print)
-		len_print = str_len;
+	if (str_len < max_print)
+		max_print = str_len;
+	else if (!ft_strncmp("(null)", str_to_print, str_len))
+		max_print = 0;
 	i = 0;
-	while (i < len_print && *str_to_print)
+	while (i < max_print && *str_to_print)
 		i += ft_printf("%c", *str_to_print++);
-	while (i < max)
+	while (i < min)
 		i += ft_printf(" ");
 	return (i);
 }
-
 
 int	print_var_minus(const char *str, va_list args)
 {
@@ -115,8 +119,6 @@ int	print_var_minus(const char *str, va_list args)
 	}
 	return (sum);
 }
-
-
 
 int	print_var_field_maximum_left(const char *str, va_list args, int max_print)
 {

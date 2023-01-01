@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/01 00:29:53 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/01 16:11:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		ft_putchar(char c);
 
 int		print_var_field_minimum(char c, va_list args, int min_print);
 int		print_var_field_max(const char *str, va_list args, int max);
-int		print_var_field_max_left(const char *str, va_list args, int max);
+int		print_var_field_max_left(const char *str, va_list args, int min);
 int		print_var_minus(const char *str, va_list args);
 
 int		print_var_0(const char *str, va_list args);
