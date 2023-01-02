@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:05:10 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/29 15:23:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/02 19:56:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ int	print_var_0(const char *str, va_list args)
 
 	min_print = ft_atoi(str);
 	while (!is_specifier_b(*str, 0))
+	{
+		if (*str == '.')
+			return (print_var_field_max(str + 1, args, min_print));
 		str++;
+	}
 	if (*str == 'd' || *str == 'i')
 		return (print_var_0_d_or_i(args, min_print));
 	if (*str == 'u')

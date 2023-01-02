@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:56:07 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/01 17:29:42 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/02 20:04:36 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	print_var_dot(const char *str, va_list args)
 		return (ft_printf("%c", va_arg(args, int)));
 	if (*str == 's')
 		return (print_var_dot_s(args, precision));
+	if (!precision)
+		return (0);
 	if (*str == 'd' || *str == 'i')
 		return (print_var_dot_int(args, precision));
 	if (*str == 'u')
