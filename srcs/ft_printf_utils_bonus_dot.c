@@ -6,7 +6,11 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:56:07 by llevasse          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/01/03 17:14:04 by llevasse         ###   ########.fr       */
+=======
+/*   Updated: 2023/01/04 15:11:44 by llevasse         ###   ########.fr       */
+>>>>>>> 546a6c7858abfea9a8be5b6fd08805030af7622b
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +52,6 @@ int	print_var_dot_s(va_list args, int precision)
 	str_print = va_arg(args, char *);
 	if (!str_print)
 		str_print = "(null)";
-	if (precision < 6 && !ft_strncmp(str_print, "(null)", 6))
-		precision = 0;
 	while (i < precision && *str_print)
 		i += ft_printf("%c", *str_print++);
 	return (i);
@@ -112,7 +114,7 @@ int	print_var_dot_hex(va_list args, int precision, int uppercase)
 
 	i = 0;
 	to_print = get_hex(va_arg(args, int), uppercase);
-	if (!to_print)
+	if (to_print[0] == '0' && precision == 0)
 		return (0);
 	if (to_print[0] == '0' && precision == 0)
 		return (free(to_print), 0);
