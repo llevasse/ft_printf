@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/01 16:11:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/04 15:18:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		print_var_0(const char *str, va_list args);
 int		print_var_0_d_or_i(va_list args, int min_print);
 int		print_var_0_u(va_list args, int min_print);
 int		print_var_0_hex(va_list args, int min_print, int uppercase);
+int 	print_var_0_pound(int min_print);
 
 int		print_var_dot(const char *str, va_list args);
 int		print_var_dot_int(va_list args, int precision);
@@ -65,5 +66,6 @@ char	*ft_itoa(int n);
 char	*set_minus(char *s, int len);
 char	*get_hex(int n, int uppercase);
 char	*get_hex_unsigned(unsigned int n, int uppercase);
-
+char	*get_address(unsigned long long n);
+char	*get_char(int c);
 #endif
