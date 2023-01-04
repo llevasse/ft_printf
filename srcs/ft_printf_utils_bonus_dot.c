@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:56:07 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/02 20:04:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/03 17:14:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	print_var_dot(const char *str, va_list args)
 		return (ft_printf("%c", va_arg(args, int)));
 	if (*str == 's')
 		return (print_var_dot_s(args, precision));
-	if (!precision)
-		return (0);
 	if (*str == 'd' || *str == 'i')
 		return (print_var_dot_int(args, precision));
 	if (*str == 'u')
@@ -65,6 +63,8 @@ int	print_var_dot_int(va_list args, int precision)
 
 	i = 0;
 	to_print = va_arg(args, int);
+	if (to_print == 0 && precision == 0)
+		return (0);
 	if (to_print < 0)
 	{
 		len_to_print = 10;
@@ -94,6 +94,8 @@ int	print_var_dot_u(va_list args, int precision)
 
 	i = 0;
 	to_print = va_arg(args, unsigned int);
+	if (to_print == 0 && precision == 0)
+		return (0);
 	len_to_print = get_unsigned_len(to_print);
 	if (len_to_print >= precision)
 		return (i + ft_printf("%u", to_print));
@@ -112,6 +114,8 @@ int	print_var_dot_hex(va_list args, int precision, int uppercase)
 	to_print = get_hex(va_arg(args, int), uppercase);
 	if (!to_print)
 		return (0);
+	if (to_print[0] == '0' && precision == 0)
+		return (free(to_print), 0);
 	len_to_print = ft_strlen(to_print);
 	if (len_to_print >= precision)
 	{	

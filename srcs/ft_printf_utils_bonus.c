@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:07:27 by levasse           #+#    #+#             */
-/*   Updated: 2022/12/31 22:55:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/03 17:53:02 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,31 @@ int	to_address(unsigned long long n)
 	ft_putstr_fd(res, 1);
 	free (res);
 	return (i + 2);
+}
+
+char	*get_address(unsigned long long n)
+{
+	char	*res;
+	char	*base;
+	int		i;
+
+	if (n == 0)
+		return ("(nil)");
+	base = "0123456789abcdef";
+	res = malloc(19 * sizeof(char));
+	if (!res)
+		return (0);
+	i = 0;
+	while (n > 0)
+	{
+		res[i] = base[n % 16];
+		n = n / 16;
+		i++;
+	}
+	res[i] = 0;
+	ft_strcat(res, "x0");
+	revert_char(res);
+	return (res);
 }
 
 int	to_hex(int n, int uppercase)
@@ -95,6 +120,18 @@ int	to_hex_unsigned(unsigned int n, int uppercase)
 	return (i);
 }
 
+char	*get_char(char c)
+{
+	char	*res;
+
+	res = malloc (2 * sizeof(char));
+	if (!res)
+		return (NULL);
+	res[0] = c;
+	res[1] = 0;
+	return (res);
+}
+
 char	*get_hex(int n, int uppercase)
 {
 	char	*res;
@@ -108,8 +145,10 @@ char	*get_hex(int n, int uppercase)
 	if (!res)
 		return (0);
 	i = 0;
+	res[0] = '0';
+	res[1] = '\0';
 	if (n == 0)
-		res[0] = '0';
+		return (res);
 	while (n > 0)
 	{
 		res[i] = base[n % 16];

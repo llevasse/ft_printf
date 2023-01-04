@@ -101,7 +101,7 @@ run: cleandebug alldebug
 	./bin/$(EXECUTABLE)
 
 bin/$(EXECUTABLE): ${BONUS_FILES} ${DEBUG_FILES} ${LIBFT_FILES}
-	gcc -ggdb $^ -o $@ 
+	gcc -g -fsanitize=address -ggdb $^ -o $@ 
 
 cleandebug:
 	-rm bin/*
