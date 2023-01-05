@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 17:47:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/05 15:46:04 by llevasse         ###   ########.fr       */
+/*   Created: 2023/01/05 15:50:11 by llevasse          #+#    #+#             */
+/*   Updated: 2023/01/05 15:50:50 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 char	*return_str(char c, va_list args, int max_print)
 {
 	char	*str_to_print;
-	char	*temp;
-	int		strlen;
-	int		i;
-	int		j;
 
 	str_to_print = NULL;
 	if (c == 's')
@@ -29,8 +25,6 @@ char	*return_str(char c, va_list args, int max_print)
 	}
 	if (c == 'c')
 		str_to_print = get_char(va_arg(args, int));
-	if (c == 'p')
-		str_to_print = get_address(va_arg(args, unsigned long long));
 	if (c == 'i' || c == 'd')
 		str_to_print = ft_itoa(va_arg(args, int));
 	if (c == 'u')
@@ -40,11 +34,30 @@ char	*return_str(char c, va_list args, int max_print)
 	if (c == 'X')
 		str_to_print = get_hex(va_arg(args, int), 1);
 	if ((c == 'i' || c == 'd' || c == 'u' || c == 'x' || c == 'X') && max_print && str_to_print)
+	if (c == 'p')
+		str_to_print = get_address(va_arg(args, unsigned long long));
+	if ((c != 's' && c != 'c') && is_specifier_b(c, 0) && max_print && str_to_print)
+		str_to_print = put_zeros(str_to_print, max_print);
+	return (str_to_print);
+}
+
+char	*put_zeros(char *str_to_print, int max_print)
+{
+	int		i;
+	int		j;
+	int		strlen;
+	char	*temp;
+
+	strlen = ft_strlen(str_to_print);
+	if (str_to_print[0] == '-')
+		strlen--;
+	if (strlen < max_print)
 	{
-		strlen = ft_strlen(str_to_print);
-		if (str_to_print[0] == '-')
-			strlen--;
-		if (strlen < max_print)
+		i = 0;
+		j = 0;
+		if (str_to_print[0] != '-')
+			temp = malloc((max_print + 1) * sizeof(char));
+		else
 		{
 			i = 0;
 			j = 0;
@@ -66,23 +79,24 @@ char	*return_str(char c, va_list args, int max_print)
 			temp[i] = '\0';
 			return (free(str_to_print), temp);
 		}
+		while (i < (max_print - strlen))
+			temp[i++] = '0';
+		while (i < max_print && *str_to_print)
+			temp[i++] = str_to_print[j++];
+		temp[i] = '\0';
+		return (free(str_to_print), temp);
 	}
 	return (str_to_print);
 }
 
-int	print_zeros(char *str, int max_print)
+void	del_minus_from_char(char *str)
 {
 	int	i;
-	int	str_len;
 
 	i = 0;
-	str_len = ft_strlen(str);
-	if (str_len < max_print)
-	{
-		while (i < (max_print - str_len))
-			i += ft_printf("0");
-	}
-	return (i);
+	while (str[i++] != 0)
+		str[i - 1] = str[i];
+	str[i - 1] = 0;
 }
 
 int	print_var_field_minimum(char c, va_list args, int min_print)
@@ -92,18 +106,20 @@ int	print_var_field_minimum(char c, va_list args, int min_print)
 	int		len_print;
 
 	len_print = 1;
+	if (c == '%')
+		return (ft_printf("%%"));
 	str_to_print = return_str(c, args, 0);
+	if (!str_to_print)
+		return (0);
 	i = 0;
-	if	(str_to_print && (str_to_print[0] != '\0' || c == 's'))
+	if (str_to_print[0])
 		len_print = ft_strlen(str_to_print);
 	while (i < min_print - len_print)
 		i += ft_printf(" ");
-	if (c == '%')
-		return (i + ft_printf("%%"));
-	if (str_to_print[0] == 0 && c != 's')
-		i++;
 	i += ft_printf("%s", str_to_print);
-	if (c == 's')
+	if (!str_to_print[0])
+		i++;
+	if (c == 's' || (c == 'p' && str_to_print[0] == '('))
 		return (i);
 	return (free(str_to_print), i);
 }
@@ -126,7 +142,7 @@ int	print_var_field_max(const char *str, va_list args, int min)
 		return (0);
 	i = 0;
 	str_len = ft_strlen(str_to_print);
-	if (*str != 's' && str_to_print[0] != '0')
+	if ((*str != 's') && is_specifier_b(*str, 0) && str_to_print[0] != '0')
 		max_print = str_len;
 	if (str_len <= max_print && *str == 's')
 		max_print = str_len;
@@ -155,8 +171,8 @@ int	print_var_field_max_left(const char *str, va_list args, int min)
 		str++;
 	str_to_print = return_str(*str, args, max_print);
 	str_len = ft_strlen(str_to_print);
-	if ((*str == 'i' || *str == 'd' || *str == 'u' || *str == 'x' || *str == 'X') && str_to_print[0] != '0')
-		max_print = str_len;
+	if ((*str != 's') && is_specifier_b(*str, 0) && str_to_print[0] != '0')
+		max_print = str_len + 1;
 	if (str_len < max_print && *str == 's')
 		max_print = str_len;
 	i = 0;

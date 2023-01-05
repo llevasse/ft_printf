@@ -6,7 +6,11 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:05:10 by llevasse          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/01/03 17:35:10 by llevasse         ###   ########.fr       */
+=======
 /*   Updated: 2023/01/04 15:19:04 by llevasse         ###   ########.fr       */
+>>>>>>> 546a6c7858abfea9a8be5b6fd08805030af7622b
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +27,8 @@ int	print_var_0(const char *str, va_list args)
 			return (print_var_field_max(str + 1, args, min_print));
 		str++;
 	}
+	if (*str == '%')
+		return (ft_printf("%%"));
 	if (*str == 'd' || *str == 'i')
 		return (print_var_0_d_or_i(args, min_print));
 	if (*str == 'u')

@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 13:56:07 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/05 15:37:06 by llevasse         ###   ########.fr       */
+/*   Created: 2023/01/05 15:50:00 by llevasse          #+#    #+#             */
+/*   Updated: 2023/01/05 15:50:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../includes/ft_printf_bonus.h"
 
@@ -108,6 +110,8 @@ int	print_var_dot_hex(va_list args, int precision, int uppercase)
 	to_print = get_hex(va_arg(args, int), uppercase);
 	if (to_print[0] == '0' && precision == 0)
 		return (0);
+	if (to_print[0] == '0' && precision == 0)
+		return (free(to_print), 0);
 	len_to_print = ft_strlen(to_print);
 	if (len_to_print >= precision)
 	{	
