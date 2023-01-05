@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:07:27 by levasse           #+#    #+#             */
-/*   Updated: 2023/01/04 16:31:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/05 14:26:05 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ char	*get_address(unsigned long long n)
 	int		i;
 
 	base = "0123456789abcdef";
-	res = malloc(11 * sizeof(char));
+	res = malloc(19 * sizeof(char));
 	if (!res)
 		return (0);
 	i = 0;

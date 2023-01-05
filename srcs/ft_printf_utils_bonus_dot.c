@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:56:07 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/04 15:11:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/05 15:37:06 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,33 +55,29 @@ int	print_var_dot_s(va_list args, int precision)
 
 int	print_var_dot_int(va_list args, int precision)
 {
-	int	to_print;
-	int	len_to_print;
-	int	i;
+	long	to_print;
+	int		len_to_print;
+	int		i;
 
 	i = 0;
-	to_print = va_arg(args, int);
+	to_print = (long)va_arg(args, int);
 	if (to_print == 0 && precision == 0)
 		return (0);
 	if (to_print < 0)
 	{
-		len_to_print = 10;
-		if (to_print == -2147483648 && precision <= 10)
-			return (ft_printf("-2147483648"));
-		else
-			len_to_print = get_int_len(to_print * -1);
+		len_to_print = get_int_len(to_print * -1);
 		i += ft_printf("-");
-		to_print = to_print * -1;
+		to_print *= -1;
 		if (precision > len_to_print)
 			len_to_print--;
 	}
 	else
 		len_to_print = get_int_len(to_print);
 	if (len_to_print >= precision)
-		return (i + ft_printf("%d", to_print));
+		return (i + ft_printf("%u", to_print));
 	while (i < (precision - len_to_print))
 		i += ft_printf("0");
-	return (i + ft_printf("%d", to_print));
+	return (i + ft_printf("%u", to_print));
 }
 
 int	print_var_dot_u(va_list args, int precision)

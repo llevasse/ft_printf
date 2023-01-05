@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2022/12/31 19:20:09 by llevasse         ###   ########.fr        #
+#    Updated: 2023/01/05 14:23:07 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,7 @@ run: cleandebug alldebug
 	./bin/$(EXECUTABLE)
 
 bin/$(EXECUTABLE): ${BONUS_FILES} ${DEBUG_FILES} ${LIBFT_FILES}
-	gcc -ggdb $^ -o $@ 
+	gcc -ggdb -fsanitize=address $^ -o $@ 
 
 cleandebug:
 	-rm bin/*

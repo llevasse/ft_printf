@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:47:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/04 17:08:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/05 15:46:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*return_str(char c, va_list args, int max_print)
 		str_to_print = get_hex(va_arg(args, int), 0);
 	if (c == 'X')
 		str_to_print = get_hex(va_arg(args, int), 1);
-	if ((c == 'i' || c == 'd' || c == 'u' || c == 'x' || c == 'X') && max_print)
+	if ((c == 'i' || c == 'd' || c == 'u' || c == 'x' || c == 'X') && max_print && str_to_print)
 	{
 		strlen = ft_strlen(str_to_print);
 		if (str_to_print[0] == '-')
@@ -54,7 +54,7 @@ char	*return_str(char c, va_list args, int max_print)
 			{
 				temp = malloc((max_print + 2) * sizeof(char));
 				if (!temp)
-					return (NULL);
+					return (free(str_to_print), NULL);
 				str_to_print = ft_itoa(ft_atoi(str_to_print) * -1);
 				max_print++;
 				temp[i++] = '-';
@@ -64,7 +64,7 @@ char	*return_str(char c, va_list args, int max_print)
 			while (i < max_print && *str_to_print)
 				temp[i++] = str_to_print[j++];
 			temp[i] = '\0';
-			return (temp);
+			return (free(str_to_print), temp);
 		}
 	}
 	return (str_to_print);
@@ -135,6 +135,8 @@ int	print_var_field_max(const char *str, va_list args, int min)
 	j = 0;
 	while (j < max_print && *str_to_print)
 		j += ft_printf("%c", *str_to_print++);
+	if (*str != 's')
+		free(str_to_print - j);
 	return (i + j);
 }
 
@@ -162,6 +164,8 @@ int	print_var_field_max_left(const char *str, va_list args, int min)
 		i += ft_printf("%c", *str_to_print++);
 	while (i < min)
 		i += ft_printf(" ");
+	if (*str != 's')
+		free(str_to_print - str_len);
 	return (i);
 }
 
