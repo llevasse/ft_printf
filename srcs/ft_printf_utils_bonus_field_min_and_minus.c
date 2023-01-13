@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:50:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/05 15:50:50 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/13 11:42:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*return_str(char c, va_list args, int max_print)
 		if (!str_to_print)
 			str_to_print = "(null)";
 	}
+	if (c == '%')
+		str_to_print = get_char('%');
 	if (c == 'c')
 		str_to_print = get_char(va_arg(args, int));
 	if (c == 'i' || c == 'd')
@@ -33,7 +35,6 @@ char	*return_str(char c, va_list args, int max_print)
 		str_to_print = get_hex(va_arg(args, int), 0);
 	if (c == 'X')
 		str_to_print = get_hex(va_arg(args, int), 1);
-	if ((c == 'i' || c == 'd' || c == 'u' || c == 'x' || c == 'X') && max_print && str_to_print)
 	if (c == 'p')
 		str_to_print = get_address(va_arg(args, unsigned long long));
 	if ((c != 's' && c != 'c') && is_specifier_b(c, 0) && max_print && str_to_print)
@@ -106,8 +107,8 @@ int	print_var_field_minimum(char c, va_list args, int min_print)
 	int		len_print;
 
 	len_print = 1;
-	if (c == '%')
-		return (ft_printf("%%"));
+	if (c == 's')
+		len_print = 0;
 	str_to_print = return_str(c, args, 0);
 	if (!str_to_print)
 		return (0);
@@ -116,9 +117,9 @@ int	print_var_field_minimum(char c, va_list args, int min_print)
 		len_print = ft_strlen(str_to_print);
 	while (i < min_print - len_print)
 		i += ft_printf(" ");
-	i += ft_printf("%s", str_to_print);
-	if (!str_to_print[0])
+	if (!*str_to_print && c != 's')
 		i++;
+	i += ft_printf("%s", str_to_print);
 	if (c == 's' || (c == 'p' && str_to_print[0] == '('))
 		return (i);
 	return (free(str_to_print), i);
@@ -180,7 +181,9 @@ int	print_var_field_max_left(const char *str, va_list args, int min)
 		i += ft_printf("%c", *str_to_print++);
 	while (i < min)
 		i += ft_printf(" ");
-	if (*str != 's')
+	if (*str != 's' && max_print == 0)
+		free(str_to_print);
+	else if (*str != 's')
 		free(str_to_print - str_len);
 	return (i);
 }

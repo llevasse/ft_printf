@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/03 15:45:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/13 10:51:06 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		print_var_field_max_left(const char *str, va_list args, int min);
 int		print_var_minus(const char *str, va_list args);
 char	*put_zeros(char *str_to_print, int max_print);
 
+int 	print_var_0_pound(int min_print);
 int		print_var_0(const char *str, va_list args);
 int		print_var_0_d_or_i(va_list args, int min_print);
 int		print_var_0_u(va_list args, int min_print);
@@ -68,6 +69,6 @@ char	*set_minus(char *s, int len);
 char	*get_hex(int n, int uppercase);
 char	*get_hex_unsigned(unsigned int n, int uppercase);
 char	*get_address(unsigned long long n);
-char	*get_char(char c);
+char	*get_char(int c);
 
 #endif
