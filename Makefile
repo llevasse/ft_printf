@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/01/17 11:44:45 by llevasse         ###   ########.fr        #
+#    Updated: 2023/01/17 12:22:51 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ FLAGS		=	-Wall -Wextra -Werror
 
 FILES		= 	srcs/ft_printf.c \
 				srcs/ft_printf_utils.c \
-				srcs/ft_printf_utils_2_electric_bangaloo.c \
+				srcs/ft_printf_utils_unsigned.c \
 				srcs/ft_rewrite_put_fd.c
 
 BONUS_FILES	= 	srcs/ft_printf_bonus.c \
@@ -22,14 +22,11 @@ BONUS_FILES	= 	srcs/ft_printf_bonus.c \
 				srcs/ft_printf_utils_bonus_extra.c \
 				srcs/ft_printf_utils_bonus_0.c \
 				srcs/ft_printf_utils_bonus_dot.c \
-				srcs/ft_printf_utils_bonus_2_electric_bangaloo.c \
+				srcs/ft_printf_utils_bonus_unsigned.c \
 				srcs/ft_printf_utils_bonus_field_min_and_minus.c \
 				srcs/ft_printf_utils_bonus_get.c \
 				srcs/ft_printf_utils_bonus_print_field.c \
 				srcs/ft_rewrite_put_fd_bonus.c
-
-DEBUG_FILES =	srcs/main.c
-
 
 LIBFT_FILES	= 	libft/ft_atoi.c \
 				libft/ft_striteri.c \
@@ -66,8 +63,6 @@ LIBFT_FILES	= 	libft/ft_atoi.c \
 				libft/ft_strchr.c \
 				libft/ft_strdup.c
 
-EXECUTABLE	:= main
-
 OBJS		= ${FILES:.c=.o}
 
 LIBFT_OBJS	= ${LIBFT_FILES:.c=.o}
@@ -95,17 +90,5 @@ fclean:		clean
 				rm -f ${NAME}
 
 re:			fclean all
-
-alldebug:	bin/$(EXECUTABLE)
-
-run: cleandebug alldebug
-	clear
-	./bin/$(EXECUTABLE)
-
-bin/$(EXECUTABLE): ${BONUS_FILES} ${DEBUG_FILES} ${LIBFT_FILES}
-	gcc -ggdb -fsanitize=address $^ -o $@ 
-
-cleandebug:
-	-rm bin/*
 
 .PHONY:		all	clean	fclean	re bonus
