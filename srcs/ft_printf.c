@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/30 14:36:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:55:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ int	ft_printf(const char *string, ...)
 	{
 		while (*string != '%' && *string)
 		{
-			ft_putchar_fd(*string, 1);
+			ft_putchar(*string);
 			string++;
 			i++;
 		}
 		if (*string == '%')
 		{
-			string++;
 			while (!is_specifier(*string))
 				string++;
 			i += print_var(*string, args);

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:07:27 by levasse           #+#    #+#             */
-/*   Updated: 2023/01/04 11:47:21 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:56:38 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,14 @@ int	to_address(unsigned long long n)
 	i = 0;
 	while (n > 0)
 	{
-		res[i] = base[n % 16];
+		res[i++] = base[n % 16];
 		n = n / 16;
-		i++;
 	}
 	res[i] = 0;
-	ft_putstr_fd("0x", 1);
+	i = ft_putstr("0x", 0);
 	revert_char(res);
-	ft_putstr_fd(res, 1);
-	free (res);
-	return (i + 2);
+	i += ft_putstr(res, 1);
+	return (i);
 }
 
 int	to_hex(int n, int uppercase)

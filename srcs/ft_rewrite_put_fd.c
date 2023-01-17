@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:17:45 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/30 14:14:35 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:42:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	ft_putstr(char *str, int with_free)
 
 	if (!str)
 		return (write(1, "(null)", 6));
-	i = ft_strlen(str);
-	write(1, str, i);
+	i = write(1, str, ft_strlen(str));
 	if (with_free)
 		return (free(str), i);
 	return (i);
