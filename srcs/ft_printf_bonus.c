@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/02 19:56:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:02:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_printf(const char *string, ...)
 		if (*string == '%')
 		{
 			string++;
-			sum += print_var(string, args);
+			sum += p_var(string, args);
 			if (is_specifier_b(*string, 1))
 			{
 				string++;
@@ -41,7 +41,7 @@ int	ft_printf(const char *string, ...)
 	return (sum);
 }
 
-int	print_var(const char *str, va_list args)
+int	p_var(const char *str, va_list args)
 {
 	if (*str == '%')
 		return (ft_printf("%c", '%'));
@@ -60,37 +60,36 @@ int	print_var(const char *str, va_list args)
 	else if (*str == 'p')
 		return (to_address(va_arg(args, unsigned long long)));
 	else if (is_specifier_b(*str, 1) || ft_isdigit(*str))
-		return (print_var_bonus(str, args));
+		return (p_var_bonus(str, args));
 	return (0);
 }
 
-int	print_var_bonus(const char *str, va_list args)
+int	p_var_bonus(const char *str, va_list args)
 {
 	int	min_print;
 
 	if (*str == '-')
-		return (print_var_minus(str + 1, args));
+		return (p_var_minus(str + 1, args));
 	if (ft_isdigit(*str) && *str != '0')
 	{
 		min_print = ft_atoi(str);
-		while (!is_specifier_b(*str, 0))
+		while (!is_specifier_b(*str, 0) || *str != '.')
 		{
-			if (*str == '.')
-				return (print_var_field_max(str + 1, args, min_print));
-			str++;
+			if (*str++ == '.')
+				return (p_field_max(str, args, min_print, ft_atoi((str))));
 		}
-		return (print_var_field_minimum(*str, args, min_print));
+		return (p_var_field_minimum(*str, args, min_print));
 	}
 	if (*str == '0')
-		return (print_var_0(str + 1, args));
+		return (p_var_0(str + 1, args));
 	if (*str == '.')
-		return (print_var_dot(str + 1, args));
+		return (p_var_dot(str + 1, args));
 	if (*str == '#')
-		return (print_var_pound(str + 1, args));
+		return (p_var_pound(str + 1, args));
 	if (*str == ' ')
-		return (print_var_space_plus(str + 1, args, ' '));
+		return (p_var_space_plus(str + 1, args, ' '));
 	if (*str == '+')
-		return (print_var_space_plus(str + 1, args, '+'));
+		return (p_var_space_plus(str + 1, args, '+'));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/01/05 15:49:29 by llevasse         ###   ########.fr        #
+#    Updated: 2023/01/17 11:44:45 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ BONUS_FILES	= 	srcs/ft_printf_bonus.c \
 				srcs/ft_printf_utils_bonus_dot.c \
 				srcs/ft_printf_utils_bonus_2_electric_bangaloo.c \
 				srcs/ft_printf_utils_bonus_field_min_and_minus.c \
+				srcs/ft_printf_utils_bonus_get.c \
+				srcs/ft_printf_utils_bonus_print_field.c \
 				srcs/ft_rewrite_put_fd_bonus.c
 
 DEBUG_FILES =	srcs/main.c

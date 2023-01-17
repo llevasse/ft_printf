@@ -6,15 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:50:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/05 15:50:01 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:02:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../includes/ft_printf_bonus.h"
 
-int	print_var_dot(const char *str, va_list args)
+int	p_var_dot(const char *str, va_list args)
 {
 	int		precision;
 
@@ -27,19 +25,19 @@ int	print_var_dot(const char *str, va_list args)
 	if (*str == 'c')
 		return (ft_printf("%c", va_arg(args, int)));
 	if (*str == 's')
-		return (print_var_dot_s(args, precision));
+		return (p_var_dot_s(args, precision));
 	if (*str == 'd' || *str == 'i')
-		return (print_var_dot_int(args, precision));
+		return (p_var_dot_int(args, precision));
 	if (*str == 'u')
-		return (print_var_dot_u(args, precision));
+		return (p_var_dot_u(args, precision));
 	if (*str == 'x')
-		return (print_var_dot_hex(args, precision, 0));
+		return (p_var_dot_hex(args, precision, 0));
 	if (*str == 'X')
-		return (print_var_dot_hex(args, precision, 1));
+		return (p_var_dot_hex(args, precision, 1));
 	return (0);
 }
 
-int	print_var_dot_s(va_list args, int precision)
+int	p_var_dot_s(va_list args, int precision)
 {
 	int			i;
 	const char	*str_print;
@@ -55,7 +53,7 @@ int	print_var_dot_s(va_list args, int precision)
 	return (i);
 }
 
-int	print_var_dot_int(va_list args, int precision)
+int	p_var_dot_int(va_list args, int precision)
 {
 	long	to_print;
 	int		len_to_print;
@@ -82,7 +80,7 @@ int	print_var_dot_int(va_list args, int precision)
 	return (i + ft_printf("%u", to_print));
 }
 
-int	print_var_dot_u(va_list args, int precision)
+int	p_var_dot_u(va_list args, int precision)
 {
 	unsigned int	to_print;
 	int				len_to_print;
@@ -100,7 +98,7 @@ int	print_var_dot_u(va_list args, int precision)
 	return (i + ft_printf("%u", to_print));
 }
 
-int	print_var_dot_hex(va_list args, int precision, int uppercase)
+int	p_var_dot_hex(va_list args, int precision, int uppercase)
 {
 	char	*to_print;
 	int		len_to_print;

@@ -6,39 +6,38 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:05:10 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/13 10:50:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:02:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf_bonus.h"
 
-int	print_var_0(const char *str, va_list args)
+int	p_var_0(const char *str, va_list args)
 {
 	int		min_print;
 
 	min_print = ft_atoi(str);
 	while (!is_specifier_b(*str, 0))
 	{
-		if (*str == '.')
-			return (print_var_field_max(str + 1, args, min_print));
-		str++;
+		if (*str++ == '.')
+			return (p_field_max(str, args, min_print, ft_atoi(str)));
 	}
 	if (*str == '%')
 		return (ft_printf("%%"));
 	if (*str == 'd' || *str == 'i')
-		return (print_var_0_d_or_i(args, min_print));
+		return (p_var_0_d_or_i(args, min_print));
 	if (*str == 'u')
-		return (print_var_0_u(args, min_print));
+		return (p_var_0_u(args, min_print));
 	if (*str == 'x')
-		return (print_var_0_hex(args, min_print, 0));
+		return (p_var_0_hex(args, min_print, 0));
 	if (*str == 'X')
-		return (print_var_0_hex(args, min_print, 1));
+		return (p_var_0_hex(args, min_print, 1));
 	if (*str == '%')
-		return (print_var_0_pound(min_print));
+		return (p_var_0_pound(min_print));
 	return (0);
 }
 
-int print_var_0_pound(int min_print)
+int	p_var_0_pound(int min_print)
 {
 	char	to_print;
 	int		len_to_print;
@@ -54,7 +53,7 @@ int print_var_0_pound(int min_print)
 	return (i + ft_printf("%c", to_print));
 }
 
-int	print_var_0_d_or_i(va_list args, int min_print)
+int	p_var_0_d_or_i(va_list args, int min_print)
 {
 	int	to_print;
 	int	len_to_print;
@@ -81,7 +80,7 @@ int	print_var_0_d_or_i(va_list args, int min_print)
 	return (i + ft_printf("%d", to_print));
 }
 
-int	print_var_0_u(va_list args, int min_print)
+int	p_var_0_u(va_list args, int min_print)
 {
 	unsigned int	to_print;
 	int				len_to_print;
@@ -97,7 +96,7 @@ int	print_var_0_u(va_list args, int min_print)
 	return (i + ft_printf("%u", to_print));
 }
 
-int	print_var_0_hex(va_list args, int min_print, int uppercase)
+int	p_var_0_hex(va_list args, int min_print, int uppercase)
 {
 	char	*to_print;
 	int		len_to_print;

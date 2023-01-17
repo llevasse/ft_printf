@@ -6,13 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:02:53 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/29 15:40:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:02:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf_bonus.h"
 
-int	print_var_pound(const char *str, va_list args)
+int	p_var_pound(const char *str, va_list args)
 {
 	int	to_print;
 
@@ -29,7 +29,7 @@ int	print_var_pound(const char *str, va_list args)
 	return (0);
 }
 
-int	print_var_space_plus(const char *str, va_list args, char c)
+int	p_var_space_plus(const char *str, va_list args, char c)
 {
 	int		int_to_print;
 
@@ -48,11 +48,11 @@ int	print_var_space_plus(const char *str, va_list args, char c)
 			str++;
 	}
 	if (*str == 's')
-		return (print_var_space_plus_s(args, int_to_print));
+		return (p_var_space_plus_s(args, int_to_print));
 	return (0);
 }
 
-int	print_var_space_plus_s(va_list args, int int_to_print)
+int	p_var_space_plus_s(va_list args, int int_to_print)
 {
 	char	*str_to_print;
 	size_t	i;
