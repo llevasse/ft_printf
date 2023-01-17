@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:50:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/17 12:02:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:59:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*put_zeros_neg(char *str_to_print, int max_print)
 	while (i < max_print && *str_to_print)
 		temp[i++] = *str_to_print++;
 	temp[i] = '\0';
-	return (free(str_to_print - strlen), temp);
+	return (free(str_to_print - strlen), str_to_print = NULL, temp);
 }
 
 void	del_minus_from_char(char *str)

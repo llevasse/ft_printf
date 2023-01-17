@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 08:12:58 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/09 09:45:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:55:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ char	*set_minus(char *s, int len)
 	ft_memset(res, 0, len + 2);
 	res[0] = '-';
 	ft_strcat(res, s);
-	free(s);
-	return (res);
+	return (free(s), s = NULL, res);
 }
 
 int	get_int_len(long n)

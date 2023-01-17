@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/17 12:02:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:43:13 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	p_var_bonus(const char *str, va_list args)
 	if (ft_isdigit(*str) && *str != '0')
 	{
 		min_print = ft_atoi(str);
-		while (!is_specifier_b(*str, 0) || *str != '.')
+		while (!is_specifier_b(*str, 0))
 		{
 			if (*str++ == '.')
 				return (p_field_max(str, args, min_print, ft_atoi((str))));
