@@ -6,13 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:05:10 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/17 12:02:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:15:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf_bonus.h"
 
-int	p_var_0(const char *str, va_list args)
+void	p_var_0(const char *str, va_list args, int *sum)
 {
 	int		min_print;
 
@@ -20,10 +20,10 @@ int	p_var_0(const char *str, va_list args)
 	while (!is_specifier_b(*str, 0))
 	{
 		if (*str++ == '.')
-			return (p_field_max(str, args, min_print, ft_atoi(str)));
+			return (p_field_max(str, args, min_print, ft_atoi(str), sum));
 	}
 	if (*str == '%')
-		return (ft_printf("%%"));
+		return (ft_putchar('%', sum));
 	if (*str == 'd' || *str == 'i')
 		return (p_var_0_d_or_i(args, min_print));
 	if (*str == 'u')
@@ -33,11 +33,10 @@ int	p_var_0(const char *str, va_list args)
 	if (*str == 'X')
 		return (p_var_0_hex(args, min_print, 1));
 	if (*str == '%')
-		return (p_var_0_pound(min_print));
-	return (0);
+		return (p_var_0_pound(min_print, sum));
 }
 
-int	p_var_0_pound(int min_print)
+int	p_var_0_pound(int min_print, int *sum)
 {
 	char	to_print;
 	int		len_to_print;

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:50:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/17 12:59:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/18 12:54:02 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,9 @@ void	del_minus_from_char(char *str)
 	str[i - 1] = 0;
 }
 
-int	p_var_minus(const char *str, va_list args)
+void	p_var_minus(const char *str, va_list args, int *sum)
 {
 	int	min_print;
-	int	sum;
 
 	min_print = 0;
 	if (ft_isdigit(*str))
@@ -108,15 +107,16 @@ int	p_var_minus(const char *str, va_list args)
 		min_print = ft_atoi(str);
 		while (!is_specifier_b(*str, 0))
 		{
+			if (*str == '.')
+				p_f_max_left(str, args, min_print, ft_atoi(str), &sum);
 			if (*str++ == '.')
-				return (p_field_max_left(str, args, min_print, ft_atoi(str)));
+				return ;
 		}
 	}
-	sum = p_var(str, args);
-	while (sum < min_print)
+	p_var(str, args, &sum);
+	while (*sum < min_print)
 	{
-		ft_putchar_fd(' ', 1);
+		ft_putchar(' ', &sum);
 		sum++;
 	}
-	return (sum);
 }

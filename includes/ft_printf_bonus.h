@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/17 12:02:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:15:27 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,21 @@
 # include <stddef.h>
 # include "../libft/libft.h"
 
-int		ft_printf(const char *string, ...);
-int		ft_putstr(char *str, int with_free);
-int		ft_putchar(char c);
+void	ft_putstr(char *str, int with_free, int *sum);
+void	ft_putchar(char c, int *sum);
+void	p_var(char c, va_list args, int *sum);
 
-int		p_var_field_minimum(char c, va_list args, int min_print);
-int		p_field_max(const char *str, va_list args, int min, int max_print);
-int		p_field_max_left(const char *str, va_list args, int min, int max_print);
-int		p_var_minus(const char *str, va_list args);
+int		ft_printf(const char *string, ...);
+
+void	p_var_field_minimum(char c, va_list args, int min_print, int *sum);
+void	p_field_max(const char *str, va_list args, int min, int max, int *sum);
+void	p_f_max_left(const char *str, va_list args, int min, int max, int *sum);
+void	p_var_minus(const char *str, va_list args, int *sum);
 char	*put_zeros(char *str_to_print, int max_print);
 char	*put_zeros_neg(char *str_to_print, int max_print);
 
-int		p_var_0_pound(int min_print);
-int		p_var_0(const char *str, va_list args);
+int		p_var_0_pound(int min_print, int *sum);
+int		p_var_0(const char *str, va_list args, int *sum);
 int		p_var_0_d_or_i(va_list args, int min_print);
 int		p_var_0_u(va_list args, int min_print);
 int		p_var_0_hex(va_list args, int min_print, int uppercase);
@@ -48,7 +50,6 @@ int		p_var_space_plus(const char *str, va_list args, char c);
 int		p_var_space_plus_s(va_list args, int int_to_print);
 
 int		p_var_bonus(const char *str, va_list args);
-int		p_var(const char *str, va_list args);
 
 int		get_int_len(int n);
 int		to_hex(int n, int uppercase);
@@ -72,5 +73,7 @@ char	*get_hex_unsigned(unsigned int n, int uppercase);
 char	*get_address(unsigned long long n);
 char	*get_char(int c);
 char	*return_str(char c, va_list args, int max_print);
+
+char	*var_to_str(char c, va_list args, int *sum);
 
 #endif
