@@ -6,25 +6,38 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:17:45 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/17 15:42:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/18 10:22:46 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int	ft_putstr(char *str, int with_free)
+void	ft_putstr(char *str, int with_free, int *sum)
 {
-	int	i;
+	int	secure;
 
-	if (!str)
-		return (write(1, "(null)", 6));
-	i = write(1, str, ft_strlen(str));
+	secure = -1;
+	if (!str && *sum != -1)
+		secure = write(1, "(null)", 6);
+	else if (str && *sum != -1)
+		secure = write(1, str, ft_strlen(str));
 	if (with_free)
-		return (free(str), i);
-	return (i);
+		free(str);
+	if (secure == -1)
+		*sum = -1;
+	else
+		*sum += secure;
 }
 
-int	ft_putchar(char c)
+void	ft_putchar(char c, int *sum)
 {
-	return (write(1, &c, 1));
+	int	secure;
+
+	secure = -1;
+	if (*sum != -1)
+		secure = (write(1, &c, 1));
+	if (secure == -1)
+		*sum = -1;
+	else
+		*sum += secure;
 }

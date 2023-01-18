@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 08:12:58 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/17 12:55:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/18 12:06:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*set_minus(char *s, int len)
 
 	res = malloc(len * sizeof(char) + 2);
 	if (!res)
-		return (NULL);
+		return (free(s), s = NULL, NULL);
 	ft_memset(res, 0, len + 2);
 	res[0] = '-';
 	ft_strcat(res, s);

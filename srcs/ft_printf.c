@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/17 15:55:23 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/18 12:31:05 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ int	ft_printf(const char *string, ...)
 
 	va_start(args, string);
 	i = 0;
-	while (*string)
+	while (*string && i != -1)
 	{
 		while (*string != '%' && *string)
 		{
-			ft_putchar(*string);
+			ft_putchar(*string, &i);
 			string++;
-			i++;
 		}
 		if (*string == '%')
 		{
+			string++;
 			while (!is_specifier(*string))
 				string++;
-			i += print_var(*string, args);
+			print_var(*string, args, &i);
 		}
 		if (*string)
 			string++;
@@ -40,25 +40,33 @@ int	ft_printf(const char *string, ...)
 	return (i);
 }
 
-int	print_var(char c, va_list args)
+void	print_var(char c, va_list args, int *sum)
 {
+	char	*str;
+
+	str = NULL;
 	if (c == '%')
-		return (ft_printf("%c", '%'));
+		return (ft_putchar('%', sum));
 	else if (c == 'c')
-		return (ft_putchar(va_arg(args, int)));
+		return (ft_putchar(va_arg(args, int), sum));
 	else if (c == 's')
-		return (ft_putstr(va_arg(args, char *), 0));
+		return (ft_putstr(va_arg(args, char *), 0, sum));
 	else if (c == 'd' || c == 'i')
-		return (ft_putstr(ft_itoa(va_arg(args, int)), 1));
+		str = (ft_itoa(va_arg(args, int)));
 	else if (c == 'u')
-		return (ft_putstr(ft_itoa_unsigned(va_arg(args, int)), 1));
+		str = (ft_itoa_unsigned(va_arg(args, int)));
 	else if (c == 'x')
-		return (to_hex(va_arg(args, int), 0));
+		str = to_base(va_arg(args, int), "0123456789abcdef");
 	else if (c == 'X')
-		return (to_hex(va_arg(args, int), 1));
+		str = to_base(va_arg(args, int), "0123456789ABCDEF");
 	else if (c == 'p')
-		return (to_address(va_arg(args, unsigned long long)));
-	return (0);
+	{
+		ft_putstr("0x", 0, sum);
+		str = to_base_u(va_arg(args, unsigned long long), "0123456789abcdef");
+	}
+	if (!str)
+		*sum = -1;
+	ft_putstr(str, 1, sum);
 }
 
 int	is_specifier(char c)

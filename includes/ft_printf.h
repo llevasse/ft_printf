@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/30 14:27:10 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/18 11:52:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 # include "../libft/libft.h"
 
 int		ft_printf(const char *string, ...);
-int		ft_putstr(char *str, int with_free);
-int		ft_putchar(char c);
-int		print_var(char c, va_list args);
+void	ft_putstr(char *str, int with_free, int *sum);
+void	ft_putchar(char c, int *sum);
+void	print_var(char c, va_list args, int *sum);
 int		get_int_len(int n);
-int		to_hex(int n, int uppercase);
-int		to_hex_unsigned(unsigned int n, int uppercase);
-int		to_address(unsigned long long n);
+void	to_hex(int n, int uppercase, int *sum);
+void	to_hex_unsigned(unsigned int n, int uppercase, int *sum);
+void	to_address(unsigned long long n, int *sum);
 int		get_unsigned_len(unsigned int n);
 int		is_specifier(char c);
 char	*ft_itoa(int n);
@@ -38,5 +38,10 @@ void	*ft_memset(void *b, int c, size_t len);
 void	ft_put_unsigned_nbr_fd(unsigned int n, int fd);
 void	revert_char(char *str);
 void	lower_str(char *str);
+
+char			*to_base(int n, const char *base);
+char			*to_base_u(unsigned long long n, const char *base);
+int				get_size_base(int n, const char *base);
+unsigned int	get_size_base_unsigned(unsigned long long n, const char *base);
 
 #endif
