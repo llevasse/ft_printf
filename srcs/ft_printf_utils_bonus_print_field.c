@@ -39,12 +39,14 @@ void	p_var_field_minimum(char c, va_list args, int min_print, int *sum)
 		ft_putstr(str_to_print, 1, sum);
 }
 
-void	p_field_max(const char *str, va_list args, int min, int max, int *sum)
+void	p_field_max(const char *str, va_list args, int min, int *sum)
 {
 	char	*str_to_print;
 	int		i;
 	int		j;
+	int		max;
 
+	max = ft_atoi(str);
 	while (ft_isdigit(*str))
 		str++;
 	str_to_print = return_str(*str, args, max);
@@ -64,15 +66,16 @@ void	p_field_max(const char *str, va_list args, int min, int max, int *sum)
 		ft_putchar(*str_to_print++, sum);
 	if (*str != 's')
 		free(str_to_print - j);
-	return (i + j);
 }
 
-void	p_f_max_left(const char *str, va_list args, int min, int max, int *sum)
+void	p_f_max_left(const char *str, va_list args, int min, int *sum)
 {
 	char	*str_to_print;
 	int		i;
 	int		str_len;
+	int		max;
 
+	max = ft_atoi(str);
 	while (ft_isdigit(*str))
 		str++;
 	str_to_print = return_str(*str, args, max);

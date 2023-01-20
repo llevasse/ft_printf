@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/18 13:13:05 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:11:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	p_var(const char *str, va_list args, int *sum)
 
 	str_p = NULL;
 	if (is_specifier_b(*str, 1) || ft_isdigit(*str))
-		return (p_var_bonus(str, args));
+		return (p_var_bonus(str, args, sum));
 	else if (*str == '%')
 		return (ft_putchar('%', sum));
 	else if (*str == 'c')
@@ -93,9 +93,9 @@ void	p_var_bonus(const char *str, va_list args, int *sum)
 		while (!is_specifier_b(*str, 0))
 		{
 			if (*str++ == '.')
-				return (p_field_max(str, args, min_print, ft_atoi((str))));
+				return (p_field_max(str, args, min_print, sum));
 		}
-		return (p_var_field_minimum(*str, args, min_print));
+		return (p_var_field_minimum(*str, args, min_print, sum));
 	}
 	if (*str == '0')
 		return (p_var_0(str + 1, args, sum));

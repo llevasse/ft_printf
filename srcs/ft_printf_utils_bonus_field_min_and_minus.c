@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:50:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/18 12:54:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:15:37 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	p_var_minus(const char *str, va_list args, int *sum)
 		while (!is_specifier_b(*str, 0))
 		{
 			if (*str == '.')
-				p_f_max_left(str, args, min_print, ft_atoi(str), &sum);
+				p_f_max_left(str, args, min_print, sum);
 			if (*str++ == '.')
 				return ;
 		}
