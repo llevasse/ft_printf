@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:02:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/20 15:07:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/23 14:28:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	p_var_pound(const char *str, va_list args, int *sum)
 	}
 }
 
-void	p_var_space_plus(const char *str, va_list args, char c, int *sum)
+void	p_var_space(const char *str, va_list args, char c, int *sum)
 {
 	int		int_to_print;
 
@@ -54,10 +54,10 @@ void	p_var_space_plus(const char *str, va_list args, char c, int *sum)
 			str++;
 	}
 	if (*str == 's')
-		return (p_var_space_plus_s(args, int_to_print, sum));
+		return (p_var_space_s(args, int_to_print, sum));
 }
 
-void	p_var_space_plus_s(va_list args, int int_to_print, int *sum)
+void	p_var_space_s(va_list args, int int_to_print, int *sum)
 {
 	char	*str_to_print;
 	size_t	i;

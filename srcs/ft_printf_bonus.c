@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/20 15:11:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/23 14:59:05 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	p_var(const char *str, va_list args, int *sum)
 	else if (*str == 's')
 		return (ft_putstr(va_arg(args, char *), 0, sum));
 	else if (is_specifier_b(*str, 0))
-		str_p = var_to_str(*str, args, &sum);
+		str_p = var_to_str(*str, args, sum);
 	if (!str_p)
-		*sum = -1;
+		return (end_ft_printf(sum));
 	ft_putstr(str_p, 1, sum);
 }
 
@@ -65,6 +65,7 @@ char	*var_to_str(char c, va_list args, int *sum)
 {
 	char	*str;
 
+	str = NULL;
 	if (c == 'd' || c == 'i')
 		str = (ft_itoa(va_arg(args, int)));
 	else if (c == 'u')
@@ -83,19 +84,19 @@ char	*var_to_str(char c, va_list args, int *sum)
 
 void	p_var_bonus(const char *str, va_list args, int *sum)
 {
-	int	min_print;
+	int	min;
 
 	if (*str == '-')
 		return (p_var_minus(str + 1, args, sum));
 	if (ft_isdigit(*str) && *str != '0')
 	{
-		min_print = ft_atoi(str);
+		min = ft_atoi(str);
 		while (!is_specifier_b(*str, 0))
 		{
 			if (*str++ == '.')
-				return (p_field_max(str, args, min_print, sum));
+				return (p_field_max(str, args, min, sum));
 		}
-		return (p_var_field_minimum(*str, args, min_print, sum));
+		return (p_var_field_minimum(*str, args, min, sum));
 	}
 	if (*str == '0')
 		return (p_var_0(str + 1, args, sum));
@@ -104,10 +105,9 @@ void	p_var_bonus(const char *str, va_list args, int *sum)
 	if (*str == '#')
 		return (p_var_pound(str + 1, args, sum));
 	if (*str == ' ')
-		return (p_var_space_plus(str + 1, args, ' ', sum));
+		return (p_var_space(str + 1, args, ' ', sum));
 	if (*str == '+')
-		return (p_var_space_plus(str + 1, args, '+', sum));
-	return (0);
+		return (p_var_space(str + 1, args, '+', sum));
 }
 
 int	is_specifier_b(char c, int is_bonus)

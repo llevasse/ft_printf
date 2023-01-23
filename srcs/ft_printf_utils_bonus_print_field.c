@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf_bonus.h"
 
-void	p_var_field_minimum(char c, va_list args, int min_print, int *sum)
+void	p_var_field_minimum(char c, va_list args, int min, int *sum)
 {
 	char	*str_to_print;
 	int		i;
@@ -21,15 +21,13 @@ void	p_var_field_minimum(char c, va_list args, int min_print, int *sum)
 	len_print = 1;
 	if (c == 's')
 		len_print = 0;
-	str_to_print = return_str(c, args, 0);
+	str_to_print = return_str(c, args, 0, 1);
 	if (!str_to_print)
-		*sum = -1;
-	if (!str_to_print)
-		return ;
+		return (end_ft_printf(sum));
 	i = 0;
 	if (str_to_print[0])
 		len_print = ft_strlen(str_to_print);
-	while (i++ < min_print - len_print)
+	while (i++ < min - len_print)
 		ft_putchar(' ', sum);
 	if (!*str_to_print && c != 's')
 		i++;
@@ -49,15 +47,13 @@ void	p_field_max(const char *str, va_list args, int min, int *sum)
 	max = ft_atoi(str);
 	while (ft_isdigit(*str))
 		str++;
-	str_to_print = return_str(*str, args, max);
+	str_to_print = return_str(*str, args, max, 1);
 	if (!str_to_print)
-		*sum = -1;
-	if (!str_to_print)
-		return ;
+		return (end_ft_printf(sum));
 	i = 0;
 	if ((*str != 's') && is_specifier_b(*str, 0) && str_to_print[0] != '0')
 		max = ft_strlen(str_to_print);
-	if (ft_strlen(str_to_print) <= max && *str == 's')
+	if (ft_strlen(str_to_print) <= (size_t)max && *str == 's')
 		max = ft_strlen(str_to_print);
 	while (i++ < (min - max))
 		ft_putchar(' ', sum);
@@ -78,11 +74,9 @@ void	p_f_max_left(const char *str, va_list args, int min, int *sum)
 	max = ft_atoi(str);
 	while (ft_isdigit(*str))
 		str++;
-	str_to_print = return_str(*str, args, max);
+	str_to_print = return_str(*str, args, max, 1);
 	if (!str_to_print)
-		*sum = -1;
-	if (!str_to_print)
-		return ;
+		return (end_ft_printf(sum));
 	str_len = ft_strlen(str_to_print);
 	if ((*str != 's') && is_specifier_b(*str, 0) && str_to_print[0] != '0')
 		max = str_len + 1;

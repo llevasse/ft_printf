@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:34:15 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/18 12:36:01 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:05:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_putstr(char *str, int with_free, int *sum)
 		secure = write(1, "(null)", 6);
 	else if (str && *sum != -1)
 		secure = write(1, str, ft_strlen(str));
+	if (str && *sum != -1 && str[0] == 0)
+		*sum += 1;
 	if (with_free)
 		free(str);
 	if (secure == -1)
