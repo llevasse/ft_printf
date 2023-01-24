@@ -67,7 +67,6 @@ void	p_field_max(const char *str, va_list args, int min, int *sum)
 void	p_f_max_left(const char *str, va_list args, int min, int *sum)
 {
 	char	*str_to_print;
-	int		i;
 	int		str_len;
 	int		max;
 
@@ -77,15 +76,15 @@ void	p_f_max_left(const char *str, va_list args, int min, int *sum)
 	str_to_print = return_str(*str, args, max, 1);
 	if (!str_to_print)
 		return (end_ft_printf(sum));
+	if (*str == 's')
+		return (p_f_max_left_s(str_to_print, min, max, sum));
 	str_len = ft_strlen(str_to_print);
 	if ((*str != 's') && is_specifier_b(*str, 0) && str_to_print[0] != '0')
 		max = str_len + 1;
-	if (str_len < max && *str == 's')
-		max = str_len;
-	i = 0;
-	while (i++ < max && *str_to_print)
+	max += *sum;
+	while (*sum < max && *str_to_print)
 		ft_putchar(*str_to_print, sum);
-	while (i++ < min)
+	while (*sum < (min + max) - 1)
 		ft_putchar(' ', sum);
 	if (*str != 's' && max == 0)
 		free(str_to_print);
@@ -93,29 +92,17 @@ void	p_f_max_left(const char *str, va_list args, int min, int *sum)
 		free(str_to_print - str_len);
 }
 
-int	p_var_field_maximum_left(const char *str, va_list args, int max_print)
+void	p_f_max_left_s(const char *str_to_print, int min, int max, int *sum)
 {
-	char	*str_to_print;
-	int		i;
 	int		str_len;
-	int		len_print;
 
-	len_print = ft_atoi(str++);
-	str_len = 0;
-	if (*str == 's')
-	{
-		str_to_print = va_arg(args, char *);
-		if (!str_to_print)
-			str_len = 6;
-		else
-			str_len = ft_strlen(str_to_print);
-	}
-	if (str_len < len_print)
-		len_print = str_len;
-	i = 0;
-	while (i < (max_print - len_print))
-		i += ft_printf(" ");
-	while (i < max_print && *str_to_print)
-		i += ft_printf("%c", *str_to_print++);
-	return (i);
+	str_len = ft_strlen(str_to_print);
+	if (str_len < max)
+		max = str_len;
+	max += *sum;
+	min += *sum;
+	while (*sum < max && *str_to_print)
+		ft_putchar(*(str_to_print++), sum);
+	while (*sum < min)
+		ft_putchar(' ', sum);
 }

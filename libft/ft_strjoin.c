@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 06:53:53 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/09 10:52:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:23:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	joined = malloc((ft_strlen(s1) + ft_strlen(s2)) * sizeof(char) + 1);
 	if (!joined)
-		return (NULL);
+		return (free(s1), NULL);
 	j = fill_str(s1, joined);
 	i = 0;
 	while (s2[i] != '\0')
@@ -34,7 +34,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	joined[j] = '\0';
-	return (joined);
+	return (free(s1), joined);
 }
 
 int	fill_str(char *s1, char *s2)

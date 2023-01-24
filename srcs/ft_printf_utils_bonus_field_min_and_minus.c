@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:50:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/23 17:12:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:12:58 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ char	*return_str(char c, va_list args, int max_print, int put_0)
 {
 	char	*str_to_print;
 
-	str_to_print = get_char('%');
+	str_to_print = NULL;
+	if (c == '%')
+		return (get_char('%'));
 	if (c == 's')
 	{
 		str_to_print = va_arg(args, char *);
@@ -26,16 +28,8 @@ char	*return_str(char c, va_list args, int max_print, int put_0)
 	}
 	if (c == 'c')
 		return (get_char(va_arg(args, int)));
-	if (c == 'i' || c == 'd')
-		str_to_print = ft_itoa(va_arg(args, int));
-	if (c == 'u')
-		str_to_print = ft_itoa_unsigned(va_arg(args, unsigned int));
-	if (c == 'x')
-		str_to_print = get_hex(va_arg(args, int), 0);
-	if (c == 'X')
-		str_to_print = get_hex(va_arg(args, int), 1);
-	if (c == 'p')
-		str_to_print = get_address(va_arg(args, unsigned long long));
+	else if (is_specifier_b(c, 0))
+		str_to_print = var_to_str(c, args);
 	if (put_0)
 		put_zeros(str_to_print, max_print);
 	return (str_to_print);
@@ -99,9 +93,7 @@ void	del_minus_from_char(char *str)
 
 void	p_var_minus(const char *str, va_list args, int *sum)
 {
-	int		min;
-	size_t	len;
-	char	*str_to_print;
+	int	min;
 
 	min = 0;
 	if (ft_isdigit(*str))
@@ -113,15 +105,8 @@ void	p_var_minus(const char *str, va_list args, int *sum)
 				return (p_f_max_left(str, args, min, sum));
 		}
 	}
-	str_to_print = return_str(*str, args, 0, 0);
-	if (!str_to_print)
-		end_ft_printf(sum);
-	len = ft_strlen(str_to_print);
-	if (str_to_print[0] == 0)
-		len = 1;
-	ft_putstr(str_to_print, 0, sum);
-	if (*str != 's')
-		free (str_to_print);
-	while ((size_t)min-- > len)
+	min += *sum;
+	p_var(str, args, sum);
+	while (*sum < min)
 		ft_putchar(' ', sum);
 }

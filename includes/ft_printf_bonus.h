@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/23 15:43:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/24 14:22:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ char			*get_address(unsigned long long n);
 char			*get_char(int c);
 char			*return_str(char c, va_list args, int max_print, int put_0);
 
-char			*var_to_str(char c, va_list args, int *sum);
+char			*var_to_str(char c, va_list args);
 char			*to_base(int n, const char *base);
 char			*to_base_u(unsigned long long n, const char *base);
 int				get_size_base(int n, const char *base);
 unsigned int	get_size_base_u(unsigned long long n, const char *base);
 void			end_ft_printf(int *sum);
+void			p_f_max_left_s(const char *str_to_print, int min, int max, int *sum);
 
 #endif

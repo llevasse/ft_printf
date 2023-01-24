@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:02:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/23 14:28:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:05:36 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,12 @@ void	p_var_pound(const char *str, va_list args, int *sum)
 		to_print = va_arg(args, int);
 		if (to_print == 0)
 			return (ft_putchar('0', sum));
+		ft_putchar('0', sum);
+		ft_putchar(*str, sum);
 		if (*str == 'x')
-		{
-			ft_putstr("0x", 0, sum);
 			ft_putstr(to_base(to_print, "0123456789abcdef"), 1, sum);
-		}
 		if (*str == 'X')
-		{
-			ft_putstr("0X", 0, sum);
-			ft_putstr(to_base(to_print, "0123456789ABCEDF"), 1, sum);
-		}
+			ft_putstr(to_base(to_print, "0123456789ABCDEF"), 1, sum);
 	}
 }
 

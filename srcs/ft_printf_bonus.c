@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/23 14:59:05 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:26:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void	p_var(const char *str, va_list args, int *sum)
 	else if (*str == 's')
 		return (ft_putstr(va_arg(args, char *), 0, sum));
 	else if (is_specifier_b(*str, 0))
-		str_p = var_to_str(*str, args, sum);
+		str_p = var_to_str(*str, args);
 	if (!str_p)
 		return (end_ft_printf(sum));
 	ft_putstr(str_p, 1, sum);
 }
 
-char	*var_to_str(char c, va_list args, int *sum)
+char	*var_to_str(char c, va_list args)
 {
 	char	*str;
 
@@ -76,8 +76,11 @@ char	*var_to_str(char c, va_list args, int *sum)
 		str = to_base(va_arg(args, int), "0123456789ABCDEF");
 	else if (c == 'p')
 	{
-		ft_putstr("0x", 0, sum);
 		str = to_base_u(va_arg(args, unsigned long long), "0123456789abcdef");
+		if (!str)
+			return (str);
+		revert_char(str);
+		revert_char(ft_strjoin(str, "0x"));
 	}
 	return (str);
 }

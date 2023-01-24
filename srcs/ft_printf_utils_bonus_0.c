@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:05:10 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/23 13:59:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:50:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	p_var_0_d_or_i(va_list args, int min, int *sum)
 	{
 		len_to_print = 10;
 		if (to_print == -2147483648 && min <= 10)
-			ft_putstr("-2147483648", 0, sum);
+			return (ft_putstr("-2147483648", 0, sum));
 		else
-			len_to_print = get_int_len(to_print * -1);
+			len_to_print = get_int_len(to_print * -1) + 1;
 		ft_putchar('-', sum);
 		to_print = to_print * -1;
 	}

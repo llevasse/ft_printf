@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:50:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/23 14:28:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:56:46 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	p_var_dot_u(va_list args, int prec, int *sum)
 	len_to_print = get_unsigned_len(to_print);
 	if (len_to_print >= prec)
 		return (ft_putstr(ft_itoa_unsigned(to_print), 1, sum));
-	while (i < (prec - len_to_print))
+	while (i++ < (prec - len_to_print))
 		ft_putchar('0', sum);
 	return (ft_putstr(ft_itoa_unsigned(to_print), 1, sum));
 }
@@ -110,7 +110,6 @@ void	p_var_dot_x(va_list args, int prec, const char *base, int *sum)
 	len_to_print = ft_strlen(to_print);
 	if (len_to_print >= prec)
 		return (ft_putstr(to_print, 1, sum));
-	i = ft_strlen(to_print);
 	while (i++ < (prec - len_to_print))
 		ft_putchar('0', sum);
 	return (ft_putstr(to_print, 1, sum));
