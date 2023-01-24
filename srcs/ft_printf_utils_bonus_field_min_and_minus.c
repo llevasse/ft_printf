@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:50:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/24 13:12:58 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:08:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*return_str(char c, va_list args, int max_print, int put_0)
 	else if (is_specifier_b(c, 0))
 		str_to_print = var_to_str(c, args);
 	if (put_0)
-		put_zeros(str_to_print, max_print);
+		str_to_print = put_zeros(str_to_print, max_print);
 	return (str_to_print);
 }
 
@@ -62,11 +62,17 @@ char	*put_zeros(char *str_to_print, int max_print)
 
 char	*put_zeros_neg(char *str_to_print, int max_print)
 {
-	int		i;
-	int		strlen;
-	char	*temp;
+	int			i;
+	long long	tempnbr;
+	int			strlen;
+	char		*temp;
 
-	str_to_print = ft_itoa(ft_atoi(str_to_print) * -1);
+	if (ft_strncmp(str_to_print, "-2147483648", ft_strlen(str_to_print)))
+		tempnbr = ft_atoi(str_to_print);
+	else
+		tempnbr = 2147483648;
+	free (str_to_print);
+	str_to_print = ft_itoa_unsigned(tempnbr * -1);
 	strlen = ft_strlen(str_to_print);
 	i = 0;
 	temp = malloc((max_print + 1) * sizeof(char));

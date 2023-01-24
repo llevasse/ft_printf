@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/24 12:26:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/24 14:56:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ char	*var_to_str(char c, va_list args)
 		if (!str)
 			return (str);
 		revert_char(str);
-		revert_char(ft_strjoin(str, "0x"));
+		str = ft_strjoin(str, "x0");
+		revert_char(str);
 	}
 	return (str);
 }

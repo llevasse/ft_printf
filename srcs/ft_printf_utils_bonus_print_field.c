@@ -61,7 +61,7 @@ void	p_field_max(const char *str, va_list args, int min, int *sum)
 	while (j++ < max && *str_to_print)
 		ft_putchar(*str_to_print++, sum);
 	if (*str != 's')
-		free(str_to_print - j);
+		free(str_to_print - max);
 }
 
 void	p_f_max_left(const char *str, va_list args, int min, int *sum)
@@ -86,10 +86,6 @@ void	p_f_max_left(const char *str, va_list args, int min, int *sum)
 		ft_putchar(*str_to_print, sum);
 	while (*sum < (min + max) - 1)
 		ft_putchar(' ', sum);
-	if (*str != 's' && max == 0)
-		free(str_to_print);
-	else if (*str != 's')
-		free(str_to_print - str_len);
 }
 
 void	p_f_max_left_s(const char *str_to_print, int min, int max, int *sum)
