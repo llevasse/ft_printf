@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/01/26 17:16:59 by llevasse         ###   ########.fr        #
+#    Updated: 2023/01/26 23:54:30 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ BONUS_FILES	= 	srcs/ft_printf_bonus.c			\
 				srcs/var_bonus/predict.c		\
 				srcs/var_bonus/print_minus.c	\
 				srcs/var_bonus/print_pound.c	\
-				srcs/var_bonus/print_pading.c	\
+				srcs/var_bonus/print_padding.c	\
+				srcs/var_bonus/print_precision.c
 				
 LIBFT_FILES	= 	libft/ft_atoi.c \
 				libft/ft_striteri.c \
