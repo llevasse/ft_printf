@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/23 14:40:09 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:11:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	ft_printf(const char *string, ...)
 		if (*string == '%')
 		{
 			string++;
-			while (!is_specifier(*string))
-				string++;
 			print_var(*string, args, &i);
 		}
 		if (*string)
@@ -42,31 +40,28 @@ int	ft_printf(const char *string, ...)
 
 void	print_var(char c, va_list args, int *sum)
 {
-	char	*str;
+	char	*base;
 
-	str = NULL;
+	base = "0123456789abcdef";
 	if (c == '%')
 		return (ft_putchar('%', sum));
 	else if (c == 'c')
 		return (ft_putchar(va_arg(args, int), sum));
 	else if (c == 's')
-		return (ft_putstr(va_arg(args, char *), 0, sum));
+		return (ft_putstr(va_arg(args, char *), sum));
 	else if (c == 'd' || c == 'i')
-		str = (ft_itoa(va_arg(args, int)));
+		return (ft_putnbr(va_arg(args, int), sum));
 	else if (c == 'u')
-		str = (ft_itoa_unsigned(va_arg(args, int)));
+		return (ft_putnbr(va_arg(args, unsigned int), sum));
 	else if (c == 'x')
-		str = to_base(va_arg(args, int), "0123456789abcdef");
+		return (ft_putnbr_base(va_arg(args, int), "0123456789abcdef", sum));
 	else if (c == 'X')
-		str = to_base(va_arg(args, int), "0123456789ABCDEF");
+		return (ft_putnbr_base(va_arg(args, int), "0123456789ABCDEF", sum));
 	else if (c == 'p')
 	{
-		ft_putstr("0x", 0, sum);
-		str = to_base_u(va_arg(args, unsigned long long), "0123456789abcdef");
+		ft_putstr("0x", sum);
+		ft_putnbr_base_u(va_arg(args, unsigned long long), base, sum);
 	}
-	if (!str)
-		*sum = -1;
-	ft_putstr(str, 1, sum);
 }
 
 int	is_specifier(char c)

@@ -6,103 +6,81 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:07:27 by levasse           #+#    #+#             */
-/*   Updated: 2023/01/18 12:28:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:47:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*to_base(int n, const char *base)
+void	ft_putstr(char *str, int *sum)
 {
-	char	*res;
-	int		i;
+	int	secure;
 
+	secure = -1;
+	if (!str && *sum != -1)
+		secure = write(1, "(null)", 6);
+	else if (str && *sum != -1)
+		secure = write(1, str, ft_strlen(str));
+	if (secure == -1)
+		*sum = -1;
+	else
+		*sum += secure;
+}
+
+void	ft_putchar(char c, int *sum)
+{
+	int	secure;
+
+	secure = -1;
+	if (*sum != -1)
+		secure = (write(1, &c, 1));
+	if (secure == -1)
+		*sum = -1;
+	else
+		*sum += secure;
+}
+
+void	ft_putnbr(long long n, int *sum)
+{
+	if (n == -2147483648)
+		return (ft_putstr("-2147483648", sum));
 	if (n < 0)
-		return (to_base_u((unsigned) n, base));
-	res = malloc((get_size_base(n, base) + 1) * sizeof(char));
-	if (!res)
-		return (NULL);
-	i = 0;
-	if (n == 0)
-		res[i++] = base[0];
-	while (n > 0)
 	{
-		res[i++] = base[n % ft_strlen(base)];
-		n = n / ft_strlen(base);
+		ft_putchar('-', sum);
+		ft_putnbr(n * -1, sum);
 	}
-	res[i] = 0;
-	revert_char(res);
-	return (res);
+	else
+	{
+		if (n < 10)
+			ft_putchar(n + '0', sum);
+		else
+		{
+			ft_putnbr(n / 10, sum);
+			ft_putchar(n % 10 + '0', sum);
+		}
+	}
 }
 
-char	*to_base_u(unsigned long long n, const char *base)
+void	ft_putnbr_base(long long n, const char *base, int *sum)
 {
-	int		i;
-	char	*res;
-
-	res = malloc((get_size_base_unsigned(n, base) + 1) * sizeof(char));
-	if (!res)
-		return (NULL);
-	i = 0;
-	if (n == 0)
-		res[i++] = base[0];
-	while (n > 0)
+	if (n < 0)
+		return (ft_putnbr_base_u((unsigned) n, base, sum));
+	if ((size_t)n < ft_strlen(base))
+		ft_putchar(base[n], sum);
+	else
 	{
-		res[i++] = base[n % ft_strlen(base)];
-		n = n / ft_strlen(base);
+		ft_putnbr_base(n / ft_strlen(base), base, sum);
+		ft_putchar(base[n % ft_strlen(base)], sum);
 	}
-	res[i] = 0;
-	revert_char(res);
-	return (res);
 }
 
-int	get_size_base(int n, const char *base)
+void	ft_putnbr_base_u(unsigned long long n, const char *base, int *sum)
 {
-	int	str_len;
-	int	i;
-
-	i = 0;
-	str_len = ft_strlen(base);
-	if (n == 0)
-		i = 1;
-	while (n > 0)
+	if ((size_t)n < ft_strlen(base))
+		ft_putchar(base[n], sum);
+	else
 	{
-		n /= str_len;
-		i++;
-	}
-	return (i);
-}
-
-unsigned int	get_size_base_unsigned(unsigned long long n, const char *base)
-{
-	int				str_len;
-	unsigned int	i;
-
-	i = 0;
-	str_len = ft_strlen(base);
-	if (n == 0)
-		i = 1;
-	while (n > 0)
-	{
-		n /= str_len;
-		i++;
-	}
-	return (i);
-}
-
-void	revert_char(char *str)
-{
-	int		len;
-	int		i;
-	char	temp;
-
-	len = ft_strlen(str);
-	i = 0;
-	while (i < len / 2)
-	{
-		temp = str[i];
-		str[i] = str[len - i - 1];
-		str[len - i - 1] = temp;
-		i++;
+		ft_putnbr_base(n / ft_strlen(base), base, sum);
+		ft_putchar(base[n % ft_strlen(base)], sum);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/24 14:56:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:13:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,114 +15,59 @@
 int	ft_printf(const char *string, ...)
 {
 	va_list		args;
-	int			sum;
+	int			i;
 
 	va_start(args, string);
-	sum = 0;
-	while (*string && sum != -1)
+	i = 0;
+	while (*string && i != -1)
 	{
 		while (*string != '%' && *string)
-			ft_putchar(*string++, &sum);
+		{
+			ft_putchar(*string, &i);
+			string++;
+		}
 		if (*string == '%')
 		{
 			string++;
-			p_var(string, args, &sum);
-			if (is_specifier_b(*string, 1))
-			{
-				string++;
-				while (!is_specifier_b(*string, 0))
-					string++;
-			}
+			print_var(*string, args, &i);
 		}
 		if (*string)
 			string++;
 	}
 	va_end(args);
-	return (sum);
+	return (i);
 }
 
-void	p_var(const char *str, va_list args, int *sum)
+void	print_var(char c, va_list args, int *sum)
 {
-	char	*str_p;
+	char	*base;
 
-	str_p = NULL;
-	if (is_specifier_b(*str, 1) || ft_isdigit(*str))
-		return (p_var_bonus(str, args, sum));
-	else if (*str == '%')
+	base = "0123456789abcdef";
+	if (c == '%')
 		return (ft_putchar('%', sum));
-	else if (*str == 'c')
+	else if (c == 'c')
 		return (ft_putchar(va_arg(args, int), sum));
-	else if (*str == 's')
-		return (ft_putstr(va_arg(args, char *), 0, sum));
-	else if (is_specifier_b(*str, 0))
-		str_p = var_to_str(*str, args);
-	if (!str_p)
-		return (end_ft_printf(sum));
-	ft_putstr(str_p, 1, sum);
-}
-
-char	*var_to_str(char c, va_list args)
-{
-	char	*str;
-
-	str = NULL;
-	if (c == 'd' || c == 'i')
-		str = (ft_itoa(va_arg(args, int)));
+	else if (c == 's')
+		return (ft_putstr(va_arg(args, char *), sum));
+	else if (c == 'd' || c == 'i')
+		return (ft_putnbr(va_arg(args, int), sum));
 	else if (c == 'u')
-		str = (ft_itoa_unsigned(va_arg(args, int)));
+		return (ft_putnbr(va_arg(args, unsigned int), sum));
 	else if (c == 'x')
-		str = to_base(va_arg(args, int), "0123456789abcdef");
+		return (ft_putnbr_base(va_arg(args, int), "0123456789abcdef", sum));
 	else if (c == 'X')
-		str = to_base(va_arg(args, int), "0123456789ABCDEF");
+		return (ft_putnbr_base(va_arg(args, int), "0123456789ABCDEF", sum));
 	else if (c == 'p')
 	{
-		str = to_base_u(va_arg(args, unsigned long long), "0123456789abcdef");
-		if (!str)
-			return (str);
-		revert_char(str);
-		str = ft_strjoin(str, "x0");
-		revert_char(str);
+		ft_putstr("0x", sum);
+		ft_putnbr_base_u(va_arg(args, unsigned long long), base, sum);
 	}
-	return (str);
 }
 
-void	p_var_bonus(const char *str, va_list args, int *sum)
+int	is_specifier(char c)
 {
-	int	min;
-
-	if (*str == '-')
-		return (p_var_minus(str + 1, args, sum));
-	if (ft_isdigit(*str) && *str != '0')
-	{
-		min = ft_atoi(str);
-		while (!is_specifier_b(*str, 0))
-		{
-			if (*str++ == '.')
-				return (p_field_max(str, args, min, sum));
-		}
-		return (p_var_field_minimum(*str, args, min, sum));
-	}
-	if (*str == '0')
-		return (p_var_0(str + 1, args, sum));
-	if (*str == '.')
-		return (p_var_dot(str + 1, args, sum));
-	if (*str == '#')
-		return (p_var_pound(str + 1, args, sum));
-	if (*str == ' ')
-		return (p_var_space(str + 1, args, ' ', sum));
-	if (*str == '+')
-		return (p_var_space(str + 1, args, '+', sum));
-}
-
-int	is_specifier_b(char c, int is_bonus)
-{
-	if (is_bonus == 0 && (c == '%' || c == 'c' || c == 's' || c == 'd' \
-	|| c == 'i' || c == 'u' || c == 'x' || c == 'X' || c == 'p'))
-		return (1);
-	if (is_bonus == 1 && (c == '-' || c == '.' \
-	|| c == '#' || c == ' ' || c == '+' || ft_isdigit(c)))
-		return (1);
-	if (is_bonus == 2 && (is_specifier_b(c, 0) || is_specifier_b(c, 1)))
+	if (c == '%' || c == 'c' || c == 's' || c == 'd' || c == 'i' \
+	|| c == 'u' || c == 'x' || c == 'X' || c == 'p')
 		return (1);
 	return (0);
 }

@@ -6,27 +6,17 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/01/23 17:10:18 by llevasse         ###   ########.fr        #
+#    Updated: 2023/01/26 11:12:26 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FLAGS		=	-Wall -Wextra -Werror
 
 FILES		= 	srcs/ft_printf.c \
-				srcs/ft_printf_utils.c \
-				srcs/ft_printf_utils_unsigned.c \
-				srcs/ft_rewrite_put_fd.c
+				srcs/ft_printf_utils.c 
 
 BONUS_FILES	= 	srcs/ft_printf_bonus.c \
-				srcs/ft_printf_utils_bonus.c \
-				srcs/ft_printf_utils_bonus_extra.c \
-				srcs/ft_printf_utils_bonus_0.c \
-				srcs/ft_printf_utils_bonus_dot.c \
-				srcs/ft_printf_utils_bonus_unsigned.c \
-				srcs/ft_printf_utils_bonus_field_min_and_minus.c \
-				srcs/ft_printf_utils_bonus_get.c \
-				srcs/ft_printf_utils_bonus_print_field.c \
-				srcs/ft_rewrite_put_fd_bonus.c
+				srcs/ft_printf_utils_bonus.c 
 
 LIBFT_FILES	= 	libft/ft_atoi.c \
 				libft/ft_striteri.c \
@@ -103,7 +93,7 @@ run: cleandebug alldebug
 	clear
 	./bin/$(EXECUTABLE)
 
-bin/$(EXECUTABLE): ${BONUS_FILES} ${MAIN_FILE} ${LIBFT_FILES}
+bin/$(EXECUTABLE): ${FILES} ${MAIN_FILE} ${LIBFT_FILES}
 	gcc -ggdb -fsanitize=address ${FLAGS} $^ -o $@ 
 
 cleandebug:
