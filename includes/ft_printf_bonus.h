@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/26 13:49:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:49:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,15 @@ int		is_specifier(char c, int bonus);
 void	print_pound(const char *str, va_list args, int *sum);
 
 void	print_minus(const char *str, va_list args, int *sum);
+
+void	print_pading(const char *str, va_list args, char c, int *sum);
+
+int		predict_len(const char *str, va_list args);
+int		get_size_base_u(unsigned long long n, const char *base);
+int		get_size_base(int n, const char *base);
+int		get_int_len(int n);
+int		get_unsigned_len(unsigned int n);
+int		print_odd(const char *str, va_list args, int *sum, int *padding);
+
 
 #endif

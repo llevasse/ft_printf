@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/01/26 11:12:26 by llevasse         ###   ########.fr        #
+#    Updated: 2023/01/26 17:16:59 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,13 @@ FLAGS		=	-Wall -Wextra -Werror
 FILES		= 	srcs/ft_printf.c \
 				srcs/ft_printf_utils.c 
 
-BONUS_FILES	= 	srcs/ft_printf_bonus.c \
-				srcs/ft_printf_utils_bonus.c 
-
+BONUS_FILES	= 	srcs/ft_printf_bonus.c			\
+				srcs/ft_printf_utils_bonus.c	\
+				srcs/var_bonus/predict.c		\
+				srcs/var_bonus/print_minus.c	\
+				srcs/var_bonus/print_pound.c	\
+				srcs/var_bonus/print_pading.c	\
+				
 LIBFT_FILES	= 	libft/ft_atoi.c \
 				libft/ft_striteri.c \
 				libft/ft_bzero.c \
@@ -93,7 +97,7 @@ run: cleandebug alldebug
 	clear
 	./bin/$(EXECUTABLE)
 
-bin/$(EXECUTABLE): ${FILES} ${MAIN_FILE} ${LIBFT_FILES}
+bin/$(EXECUTABLE): ${BONUS_FILES} ${MAIN_FILE} ${LIBFT_FILES}
 	gcc -ggdb -fsanitize=address ${FLAGS} $^ -o $@ 
 
 cleandebug:

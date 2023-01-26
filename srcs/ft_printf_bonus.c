@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/26 14:13:50 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:17:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	print_var_bonus(const char *str, va_list args, int *sum)
 		return (print_pound(str++, args, sum));
 	if (*str == '-')
 		return (print_minus(str++, args, sum));
+	if (*str == '0')
+		return (print_pading((str + 1), args, *str, sum));
 }
 
 int	is_specifier(char c, int bonus)
@@ -81,7 +83,7 @@ int	is_specifier(char c, int bonus)
 	if (!bonus && (c == '%' || c == 'c' || c == 's' || c == 'd' || c == 'i' \
 	|| c == 'u' || c == 'x' || c == 'X' || c == 'p'))
 		return (1);
-	if (bonus == 1 && (c == '#' || c == '-'))
+	if (bonus == 1 && (c == '#' || c == '-' || c == '0'))
 		return (1);
 	if (bonus == 2 && (is_specifier(c, 0) || is_specifier(c, 1)))
 		return (1);
