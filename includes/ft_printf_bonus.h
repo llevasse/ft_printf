@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/27 10:15:50 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:15:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,16 @@ void	print_prec(const char *str, va_list args, int *sum);
 
 void	print_space(const char *str, va_list args, int *sum);
 
+void	print_plus(const char *str, va_list args, int *sum);
+
 int		predict_len(const char *str, va_list args);
 int		get_size_base_u(unsigned long long n, const char *base);
 int		get_size_base(int n, const char *base);
 int		get_int_len(int n);
 int		get_unsigned_len(unsigned int n);
 int		print_odd(const char *str, va_list args, int *sum, int *padding);
+
+int		check_priorities(const char *str, va_list args, int *sum);
 
 
 #endif

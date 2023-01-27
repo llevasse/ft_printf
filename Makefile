@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/01/26 23:54:30 by llevasse         ###   ########.fr        #
+#    Updated: 2023/01/27 10:46:15 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,17 @@ FLAGS		=	-Wall -Wextra -Werror
 FILES		= 	srcs/ft_printf.c \
 				srcs/ft_printf_utils.c 
 
-BONUS_FILES	= 	srcs/ft_printf_bonus.c			\
-				srcs/ft_printf_utils_bonus.c	\
-				srcs/var_bonus/predict.c		\
-				srcs/var_bonus/print_minus.c	\
-				srcs/var_bonus/print_pound.c	\
-				srcs/var_bonus/print_padding.c	\
-				srcs/var_bonus/print_precision.c
+BONUS_FILES	= 	srcs/ft_printf_bonus.c				\
+				srcs/ft_printf_utils_bonus.c		\
+				srcs/var_bonus/predict.c			\
+				srcs/var_bonus/print_minus.c		\
+				srcs/var_bonus/print_pound.c		\
+				srcs/var_bonus/print_padding.c		\
+				srcs/var_bonus/print_precision.c	\
+				srcs/var_bonus/print_space.c		\
+				srcs/var_bonus/print_plus.c			\
+				srcs/var_bonus/priorities.c			\
+				
 				
 LIBFT_FILES	= 	libft/ft_atoi.c \
 				libft/ft_striteri.c \
