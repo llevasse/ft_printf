@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/27 10:27:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:15:03 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,20 @@ void	print_var(const char *str, va_list args, int *sum)
 
 void	print_var_bonus(const char *str, va_list args, int *sum)
 {
+	if (check_priorities(str, args, sum))
+		return ;
+	if (*str == ' ')
+		return (print_space(str, args, sum));
 	if (*str == '#')
-		return (print_pound(str++, args, sum));
+		return (print_pound(str, args, sum));
 	if (*str == '-')
-		return (print_minus(str++, args, sum));
+		return (print_minus(str, args, sum));
 	if (*str == '0')
 		return (print_padding((str + 1), args, *str, sum));
 	if (*str == '.')
 		return (print_prec((str + 1), args, sum));
-	if (*str == ' ')
-		return (print_space(str++, args, sum));
+	if (*str == '+')
+		return (print_plus(str, args, sum));
 }
 
 int	is_specifier(char c, int bonus)
@@ -87,7 +91,7 @@ int	is_specifier(char c, int bonus)
 	if (!bonus && (c == '%' || c == 'c' || c == 's' || c == 'd' || c == 'i' \
 	|| c == 'u' || c == 'x' || c == 'X' || c == 'p'))
 		return (1);
-	if (bonus == 1 && (c == '#' || c == '-' || c == '0' || c == '.' || c == ' '))
+	if (bonus == 1 && (c == '#' || c == '-' || c == '0' || c == '.' || c == ' ' || c == '+'))
 		return (1);
 	if (bonus == 2 && (is_specifier(c, 0) || is_specifier(c, 1)))
 		return (1);

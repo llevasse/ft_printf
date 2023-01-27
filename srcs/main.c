@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 11:06:02 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/27 10:32:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:52:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ int	main(int argc, char *argv[])
 	int		var;
 	char	*varstr;
 
-	s = "%     d";
+	s = "% +d";
 	varstr = "";
-	var = -20;
+	var = 20;
+	(void)var;	
 	(void)varstr;
 	ft_printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	ft_printf("\ntest for %s |", s);

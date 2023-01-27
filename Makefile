@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/01/27 10:46:15 by llevasse         ###   ########.fr        #
+#    Updated: 2023/01/27 11:51:25 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ LIBFT_FILES	= 	libft/ft_atoi.c \
 				libft/ft_split.c \
 				libft/ft_toupper.c \
 				libft/ft_strchr.c \
-				libft/ft_strdup.c
+				libft/ft_strdup.c \
+				libft/ft_is_in_str.c \
 
 MAIN_FILE	= 	srcs/main.c
 
