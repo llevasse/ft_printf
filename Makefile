@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/01/27 11:51:25 by llevasse         ###   ########.fr        #
+#    Updated: 2023/01/28 10:27:57 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ BONUS_FILES	= 	srcs/ft_printf_bonus.c				\
 				srcs/var_bonus/print_space.c		\
 				srcs/var_bonus/print_plus.c			\
 				srcs/var_bonus/priorities.c			\
+				srcs/var_bonus/print_field_width.c	\
 				
 				
 LIBFT_FILES	= 	libft/ft_atoi.c \

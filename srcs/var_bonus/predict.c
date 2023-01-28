@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:42:42 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/26 17:40:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/28 10:55:11 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	predict_len(const char *str, va_list args)
 		return (get_size_base_u(va_arg(args_cp, unsigned long long), base));
 	return (0);
 }
-
 
 int	get_size_base(int n, const char *base)
 {
@@ -78,7 +77,6 @@ int	get_int_len(int n)
 	if (n < 10)
 		return (1);
 	return (1 + get_int_len(n / 10));
-
 }
 
 int	get_unsigned_len(unsigned int n)
