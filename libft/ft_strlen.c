@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:50:35 by llevasse          #+#    #+#             */
-/*   Updated: 2022/11/23 08:36:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/30 11:18:03 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	if (!s)
+		return (6);
+	while (s[i])
 		i++;
 	return (i);
 }
