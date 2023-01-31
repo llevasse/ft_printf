@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:28:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/28 10:54:35 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/28 15:08:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	print_field_width(const char *str, va_list args, int *sum)
 	int		len;
 
 	width = ft_atoi(str);
+	if (*str == '*')
+		width = va_arg(args, int);
 	while (!is_specifier(*str, 0))
 	{
 		if (*str++ == '.')

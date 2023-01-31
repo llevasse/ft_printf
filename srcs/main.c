@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 11:06:02 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/28 10:53:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/28 16:02:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	main(int argc, char *argv[])
 	int		var;
 	char	*varstr;
 
-	s = "%10.5s";
-	varstr = "cc";
-	var = 20;
+	s = "% 1s";
+	varstr = "";
+	var = 0;
 	(void)var;	
 	(void)varstr;
 	ft_printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");

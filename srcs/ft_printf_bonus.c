@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/28 10:42:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/28 15:15:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	print_var_bonus(const char *str, va_list args, int *sum)
 		return (print_minus(str, args, sum));
 	if (*str == '0')
 		return (print_padding((str + 1), args, *str, sum));
-	if (ft_isdigit(*str))
+	if (ft_isdigit(*str) || *str == '*')
 		return (print_field_width(str, args, sum));
 	if (*str == '.')
 		return (print_prec((str + 1), args, sum));
@@ -90,7 +90,7 @@ void	print_var_bonus(const char *str, va_list args, int *sum)
 
 int	is_specifier(char c, int bonus)
 {
-	if (!bonus && ft_is_in_str("%%csdiuxX", c))
+	if (!bonus && ft_is_in_str("%%csdiuxXp", c))
 		return (1);
 	if (bonus == 1 && ft_is_in_str("#-0. +123456789", c))
 		return (1);
