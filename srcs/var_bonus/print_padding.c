@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:44:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/28 15:40:10 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:19:06 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	print_padding(const char *str, va_list args, char c, int *sum)
 {
-	int		var_len;
-	int		int_to_print;
-	int		padding_len;
-	char	*base;
+	int			var_len;
+	long long	int_to_print;
+	int			padding_len;
+	char		*base;
 
 	base = "0123456789abcdef";
 	padding_len = ft_atoi(str);
@@ -31,6 +31,8 @@ void	print_padding(const char *str, va_list args, char c, int *sum)
 	if (*str != 'd' && *str != 'i')
 		return (print_var(str, args, sum));
 	int_to_print = va_arg(args, int);
+	if (int_to_print >= 0 && get_spec(str) == '.')
+		padding_len--;
 	if (int_to_print < 0)
 		int_to_print *= -1;
 	return (ft_putnbr(int_to_print, sum));
@@ -54,11 +56,26 @@ int	print_odd(const char *str, va_list args, int *sum, int *padding)
 		int_to_print = va_arg(args_cp, int);
 		if (int_to_print < 0)
 		{
-			*padding -= 1;
+			if (get_spec(str) != '.')
+				*padding -= 1;
 			var_len--;
 			ft_putchar('-', sum);
 			int_to_print *= -1;
 		}
 	}
 	return (var_len);
+}
+
+int	get_spec(const char *str)
+{
+	int	spec;
+
+	spec = 0;
+	while (*(str - spec) != '%')
+	{
+		if (*(str - spec) == '.')
+			break ;
+		spec++;
+	}
+	return (*(str - spec));
 }

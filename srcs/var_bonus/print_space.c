@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 10:18:02 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/28 16:06:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:38:12 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	print_space(const char *str, va_list args, int *sum)
 	{
 		str_to_print = va_arg(args, char *);
 		if (!*str_to_print)
-			return (ft_putchar(' ', sum));
-		ft_putstr(str_to_print, sum);
+			return ;
+		return (ft_putstr(str_to_print, sum));
 	}
 	print_var(str, args, sum);
 }

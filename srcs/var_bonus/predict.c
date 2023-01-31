@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:42:42 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/28 10:55:11 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:17:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	get_size_base_u(unsigned long long n, const char *base)
 	return (i);
 }
 
-int	get_int_len(int n)
+int	get_int_len(long long n)
 {
 	if (n < 0)
 		return (1 + get_int_len(n * -1));

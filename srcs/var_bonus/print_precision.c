@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:53:50 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/31 14:01:43 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:41:06 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ void	print_prec(const char *str, va_list args, int *sum)
 		str_to_print = va_arg(args, char *);
 		if (!str_to_print)
 			str_to_print = "(null)";
-/* 		if (prec == 0)
-			return (ft_putstr(str_to_print, sum));
- */		while (i < prec && str_to_print[i])
+		while (i < prec && str_to_print[i])
 			ft_putchar(str_to_print[i++], sum);
 	}
 }

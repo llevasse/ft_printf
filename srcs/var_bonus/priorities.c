@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 10:46:32 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/27 11:51:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:33:11 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ int	check_priorities(const char *str, va_list args, int *sum)
 	{
 		while (!is_specifier(*str, 0) && *str)
 		{
-			if (*str++ == '+')
-				return (print_plus((str - 1), args, sum), 1);
+			if (*str == '+')
+				return (print_plus((str), args, sum), 1);
+			if (ft_is_in_str("132456789", *str))
+				return (print_field_width(str, args, sum), 1);
+			str++;
 		}
 	}
 	return (0);
