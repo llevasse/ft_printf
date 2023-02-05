@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/31 14:01:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:20:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_var_bonus(const char *str, va_list args, int *sum)
 	if (*str == '#')
 		return (print_pound(str, args, sum));
 	if (*str == '-')
-		return (print_minus(str, args, sum));
+		return (print_minus((str + 1), args, sum));
 	if (*str == '0')
 		return (print_padding((str + 1), args, *str, sum));
 	if (ft_isdigit(*str) || *str == '*')

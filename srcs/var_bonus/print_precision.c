@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:53:50 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/31 15:41:06 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:06:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	print_prec(const char *str, va_list args, int *sum)
 		while (i < prec && str_to_print[i])
 			ft_putchar(str_to_print[i++], sum);
 	}
+	if (*str == 'c')
+		ft_putchar(va_arg(args, int), sum);
 }
 
 void	print_padding_prec(const char *str, va_list args, char c, int *sum)
