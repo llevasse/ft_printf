@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:28:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/28 15:08:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:54:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,32 @@ void	print_width_prec(const char *str, va_list args, int width, int *sum)
 
 	prec = ft_atoi(str);
 	i = predict_length_precision(str, args, prec);
-	while (width-- > i)
+	while (width > i++)
 		ft_putchar(' ', sum);
 	i = 0;
 	while (!is_specifier(*str, 0))
 	{
 		str++;
 		i++;
-		if (*str == 'd' || *str == 'i' || *str == 'u' \
-		|| *str == 'x' || *str == 'X')
+		if (ft_is_in_str("diuxX", *str))
 			return (print_padding((str - i), args, '0', sum));
 	}
 	if (*str == 's')
-		print_width_prec_s(va_arg(args, char *), prec, sum);
+		print_width_prec_s(va_arg(args, char *), prec, width, sum);
 }
 
-void	print_width_prec_s(char *str_to_print, int prec, int *sum)
+void	print_width_prec_s(char *str_to_print, int prec, int width, int *sum)
 {
-	while ((size_t)prec > ft_strlen(str_to_print))
-	{
-		ft_putchar(' ', sum);
-		prec -= 1;
-	}
 	if (prec == 0)
 		return (ft_putstr(str_to_print, sum));
+	if ((size_t)width > ft_strlen(str_to_print))
+	{
+		while ((size_t)prec > ft_strlen(str_to_print))
+		{
+			ft_putchar(' ', sum);
+			prec -= 1;
+		}
+	}
 	while (prec-- > 0 && *str_to_print)
 		ft_putchar(*str_to_print++, sum);
 }
