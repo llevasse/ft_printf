@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 11:06:02 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/31 15:36:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:01:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	main(int argc, char *argv[])
 	int		var;
 	char	*varstr;
 
-	s = " % s ";
-	varstr = "-";
-	var = -1;
+	s = "%p";
+	varstr = NULL;
+	var = 5;
 	(void)s;
 	(void)var;	
 	(void)varstr;

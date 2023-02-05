@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:07:27 by levasse           #+#    #+#             */
-/*   Updated: 2023/01/26 12:14:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:00:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_putnbr_base_u(unsigned long long n, const char *base, int *sum)
 		ft_putchar(base[n], sum);
 	else
 	{
-		ft_putnbr_base(n / ft_strlen(base), base, sum);
+		ft_putnbr_base_u(n / ft_strlen(base), base, sum);
 		ft_putchar(base[n % ft_strlen(base)], sum);
 	}
 }

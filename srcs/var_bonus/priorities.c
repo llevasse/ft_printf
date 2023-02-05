@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 10:46:32 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/31 15:33:11 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:50:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	check_priorities(const char *str, va_list args, int *sum)
 	while (!is_specifier(*(str + spec), 0))
 		spec++;
 	spec = *(str + spec);
+	if (spec == '%')
+		return (ft_putchar('%', sum), 1);
 	if (*str == '0')
 	{
 		while (!is_specifier(*str, 0) && *str)
