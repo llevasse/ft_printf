@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:42:42 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/31 14:17:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:06:12 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	predict_len(const char *str, va_list args)
 		return (1);
 	if (*str == 's')
 		return (ft_strlen(va_arg(args_cp, char *)));
+	if (ft_is_in_str("diuxX", *str) && is_neg(str, args) == 2 && has_prec(str))
+		return (0);
 	if (*str == 'd' || *str == 'i')
 		return (get_int_len(va_arg(args_cp, int)));
 	if (*str == 'u')

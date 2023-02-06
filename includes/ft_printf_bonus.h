@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/06 16:02:07 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:58:11 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	print_minus(const char *str, va_list args, int *sum);
 void	print_padding(const char *str, va_list args, char c, int *sum);
 int		get_para(const char *str);
 int		get_spec(const char *str);
+int		has_prec(const char *str);
 
 void	print_prec(const char *str, va_list args, int *sum);
 void	print_padding_prec(const char *str, va_list args, char c, int *sum);

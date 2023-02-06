@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:28:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/06 16:05:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:05:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_field_width(const char *str, va_list args, int *sum)
 			return (print_width_prec(str, args, width, sum));
 	}
 	len = predict_len(str, args);
-	if (is_neg(str, args))
+	if (is_neg(str, args) == 1)
 		ft_putchar('-', sum);
 	while (width-- > len)
 	{
@@ -45,13 +45,13 @@ void	print_width_prec(const char *str, va_list args, int width, int *sum)
 	int		spec;
 
 	prec = ft_atoi(str);
-	spec = get_spec(str);
+	spec = get_para(str);
 	if (spec != '0')
 		spec = ' ';
 	if (get_para(str) == '0' && ft_is_in_str("di", get_spec(str)))
 		width -= is_neg(str, args);
 	i = predict_length_precision(str, args, prec);
-	if (is_neg(str, args))
+	if (is_neg(str, args) == 1)
 		ft_putchar('-', sum);
 	while (width > i++)
 		ft_putchar(spec, sum);
@@ -69,13 +69,20 @@ void	print_width_prec(const char *str, va_list args, int width, int *sum)
 
 int	is_neg(const char *str, va_list args)
 {
+	int		int_to_print;
 	va_list	args_cp;
 
 	va_copy(args_cp, args);
-	if (ft_is_in_str("di", get_spec(str)) && get_para(str) == '0')
+	if (ft_is_in_str("di", get_spec(str)))
 	{
-		if (va_arg(args_cp, int) < 0)
-			return (1);
+		int_to_print = va_arg(args_cp, int);
+		if (get_para(str) == '0')
+		{
+			if (int_to_print < 0)
+				return (1);
+		}
+		if (int_to_print == 0)
+			return (2);
 	}
 	return (0);
 }
