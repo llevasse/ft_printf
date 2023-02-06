@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:28:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/05 11:54:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:43:22 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	print_width_prec(const char *str, va_list args, int width, int *sum)
 	int		prec;
 
 	prec = ft_atoi(str);
+	while (!is_specifier(*str, 0))
+		str++;
 	i = predict_length_precision(str, args, prec);
 	while (width > i++)
 		ft_putchar(' ', sum);
@@ -49,31 +51,30 @@ void	print_width_prec(const char *str, va_list args, int width, int *sum)
 			return (print_padding((str - i), args, '0', sum));
 	}
 	if (*str == 's')
-		print_width_prec_s(va_arg(args, char *), prec, width, sum);
+		print_width_prec_s(va_arg(args, char *), prec, sum);
 }
 
-void	print_width_prec_s(char *str_to_print, int prec, int width, int *sum)
+void	print_width_prec_s(char *str_to_print, int prec, int *sum)
 {
-	if (prec == 0)
-		return (ft_putstr(str_to_print, sum));
-	if ((size_t)width > ft_strlen(str_to_print))
-	{
-		while ((size_t)prec > ft_strlen(str_to_print))
-		{
-			ft_putchar(' ', sum);
-			prec -= 1;
-		}
-	}
-	while (prec-- > 0 && *str_to_print)
+	if (!str_to_print && prec >= 6)
+		str_to_print = "(null)";
+	while (prec-- > 0 && str_to_print && *str_to_print)
 		ft_putchar(*str_to_print++, sum);
 }
 
 int	predict_length_precision(const char *str, va_list args, int prec)
 {
-	int	var_len;
+	int			var_len;
+	va_list		args_cp;
 
+	va_copy(args_cp, args);
 	var_len = predict_len(str, args);
+	if (*str == 's')
+	{
+		if (!(va_arg(args_cp, char *)) && prec < 6)
+			var_len = 0;
+	}
 	if (var_len < prec)
-		return (prec);
-	return (var_len);
+		return (var_len);
+	return (prec);
 }
