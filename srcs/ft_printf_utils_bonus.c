@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:07:27 by levasse           #+#    #+#             */
-/*   Updated: 2023/02/05 11:00:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:54:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,24 @@ void	ft_putchar(char c, int *sum)
 		*sum += secure;
 }
 
-void	ft_putnbr(long long n, int *sum)
+void	ft_putnbr(long long n, int abs, int *sum)
 {
 	if (n == -2147483648)
 		return (ft_putstr("-2147483648", sum));
-	if (n < 0)
+	if (n < 0 && !abs)
 	{
 		ft_putchar('-', sum);
-		ft_putnbr(n * -1, sum);
+		ft_putnbr(n * -1, 0, sum);
 	}
+	else if (n < 0 && abs)
+		ft_putnbr(n * -1, 0, sum);
 	else
 	{
 		if (n < 10)
 			ft_putchar(n + '0', sum);
 		else
 		{
-			ft_putnbr(n / 10, sum);
+			ft_putnbr(n / 10, 0, sum);
 			ft_putchar(n % 10 + '0', sum);
 		}
 	}

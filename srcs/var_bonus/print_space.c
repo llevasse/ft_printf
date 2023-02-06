@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 10:18:02 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/31 15:38:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:57:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_space(const char *str, va_list args, int *sum)
 		var = va_arg(args, int);
 		if (var >= 0)
 			ft_putchar(' ', sum);
-		return (ft_putnbr(var, sum));
+		return (ft_putnbr(var, 0, sum));
 	}
 	if (*str == 's')
 	{

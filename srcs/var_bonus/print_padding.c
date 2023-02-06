@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:44:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/31 15:19:06 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:57:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	print_padding(const char *str, va_list args, char c, int *sum)
 	if (*str != 'd' && *str != 'i')
 		return (print_var(str, args, sum));
 	int_to_print = va_arg(args, int);
-	if (int_to_print >= 0 && get_spec(str) == '.')
+	if (int_to_print >= 0 && get_para(str) == '.')
 		padding_len--;
 	if (int_to_print < 0)
 		int_to_print *= -1;
-	return (ft_putnbr(int_to_print, sum));
+	return (ft_putnbr(int_to_print, 0, sum));
 }
 
 int	print_odd(const char *str, va_list args, int *sum, int *padding)
@@ -56,17 +56,18 @@ int	print_odd(const char *str, va_list args, int *sum, int *padding)
 		int_to_print = va_arg(args_cp, int);
 		if (int_to_print < 0)
 		{
-			if (get_spec(str) != '.')
+			if (get_para(str) != '.')
 				*padding -= 1;
 			var_len--;
-			ft_putchar('-', sum);
+			if (get_para(str) != '0')
+				ft_putchar('-', sum);
 			int_to_print *= -1;
 		}
 	}
 	return (var_len);
 }
 
-int	get_spec(const char *str)
+int	get_para(const char *str)
 {
 	int	spec;
 
@@ -77,5 +78,14 @@ int	get_spec(const char *str)
 			break ;
 		spec++;
 	}
+	if (*(str - (spec - 1)) == '0')
+		return ('0');
 	return (*(str - spec));
+}
+
+int	get_spec(const char *str)
+{
+	while (!(is_specifier(*str, 0)) && *str)
+		str++;
+	return (*str);
 }

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/05 11:20:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:01:49 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	print_var(const char *str, va_list args, int *sum)
 	else if (*str == 's')
 		return (ft_putstr(va_arg(args, char *), sum));
 	else if (*str == 'd' || *str == 'i')
-		return (ft_putnbr(va_arg(args, int), sum));
+		return (ft_putnbr(va_arg(args, int), is_neg(str, args), sum));
 	else if (*str == 'u')
-		return (ft_putnbr(va_arg(args, unsigned int), sum));
+		return (ft_putnbr(va_arg(args, unsigned int), 0, sum));
 	else if (*str == 'x')
 		return (ft_putnbr_base(va_arg(args, int), "0123456789abcdef", sum));
 	else if (*str == 'X')

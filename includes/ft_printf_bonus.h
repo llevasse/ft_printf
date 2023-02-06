@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/06 10:42:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:02:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 int		ft_printf(const char *string, ...);
 void	ft_putstr(char *str, int *sum);
 void	ft_putchar(char c, int *sum);
-void	ft_putnbr(long long n, int *sum);
+void	ft_putnbr(long long n, int abs, int *sum);
 void	ft_putnbr_base(int n, const char *base, int *sum);
 void	ft_putnbr_base_u(unsigned long long n, const char *base, int *sum);
 void	print_var(const char *str, va_list args, int *sum);
@@ -34,6 +34,7 @@ void	print_pound(const char *str, va_list args, int *sum);
 void	print_minus(const char *str, va_list args, int *sum);
 
 void	print_padding(const char *str, va_list args, char c, int *sum);
+int		get_para(const char *str);
 int		get_spec(const char *str);
 
 void	print_prec(const char *str, va_list args, int *sum);
@@ -46,6 +47,7 @@ void	print_plus(const char *str, va_list args, int *sum);
 
 void	print_field_width(const char *str, va_list args, int *sum);
 void	print_width_prec(const char *str, va_list args, int width, int *sum);
+int		is_neg (const char *str, va_list args);
 int		predict_length_precision(const char *str, va_list args, int prec);
 void	print_width_prec_s(char *str_to_print, int prec, int *sum);
 

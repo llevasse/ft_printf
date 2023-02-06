@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 10:46:32 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/05 10:50:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:24:03 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	check_priorities(const char *str, va_list args, int *sum)
 	{
 		while (!is_specifier(*str, 0) && *str)
 		{
+			if (ft_isdigit(*str) && *str != '0')
+				return (print_field_width(str, args, sum), 1);
 			if (*str == '-')
 				return (print_minus(str, args, sum), 1);
 			if (*str++ == '.' && ft_is_in_str("diuxX", spec))

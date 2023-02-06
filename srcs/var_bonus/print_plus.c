@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 10:38:19 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/27 10:41:48 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:57:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_plus(const char *str, va_list args, int *sum)
 		var = va_arg(args, int);
 		if (var >= 0)
 			ft_putchar('+', sum);
-		return (ft_putnbr(var, sum));
+		return (ft_putnbr(var, 0, sum));
 	}
 	print_var(str, args, sum);
 }

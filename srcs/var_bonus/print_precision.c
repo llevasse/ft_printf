@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:53:50 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/06 09:42:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:57:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	print_padding_prec(const char *str, va_list args, char c, int *sum)
 	int_to_print = va_arg(args, int);
 	if (int_to_print < 0)
 		int_to_print *= -1;
-	return (ft_putnbr(int_to_print, sum));
+	return (ft_putnbr(int_to_print, 0, sum));
 }
 
 int	print_odd_prec(const char *str, va_list args, int *sum)
