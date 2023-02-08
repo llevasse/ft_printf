@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:28:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/08 14:33:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:41:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ void	print_width_prec(const char *str, va_list args, int width, int *sum)
 
 int	is_neg(const char *str, va_list args)
 {
-	int		int_to_print;
-	va_list	args_cp;
+	long long	int_to_print;
+	va_list		args_cp;
 
 	va_copy(args_cp, args);
-	if (ft_is_in_str("di", get_spec(str)))
+	if (ft_is_in_str("dixXu", get_spec(str)))
 	{
-		int_to_print = va_arg(args_cp, int);
+		int_to_print = va_arg(args_cp, long long);
 		if (get_para(str) == '0')
 		{
 			if (int_to_print < 0)
