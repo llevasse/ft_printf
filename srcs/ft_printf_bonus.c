@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/06 16:01:49 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:50:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	ft_printf(const char *string, ...)
 		if (*string == '%')
 		{
 			string++;
-			print_var(string, args, &i);
+			if (is_specifier(*string, 1))
+				print_var_bonus(string, args, &i);
+			else
+				print_var(string, args, &i);
 			while (!is_specifier(*string, 0))
 				string++;
 		}
@@ -42,11 +45,8 @@ int	ft_printf(const char *string, ...)
 
 void	print_var(const char *str, va_list args, int *sum)
 {
-	char	*base;
+	unsigned long long	address;
 
-	if (is_specifier(*str, 1))
-		return (print_var_bonus(str, args, sum));
-	base = "0123456789abcdef";
 	if (*str == '%')
 		return (ft_putchar('%', sum));
 	else if (*str == 'c')
@@ -63,8 +63,11 @@ void	print_var(const char *str, va_list args, int *sum)
 		return (ft_putnbr_base(va_arg(args, int), "0123456789ABCDEF", sum));
 	else if (*str == 'p')
 	{
+		address = va_arg(args, unsigned long long);
+		if (!address)
+			return (ft_putstr("(nil)", sum));
 		ft_putstr("0x", sum);
-		ft_putnbr_base_u(va_arg(args, unsigned long long), base, sum);
+		ft_putnbr_base_u(address, "0123456789abcdef", sum);
 	}
 }
 

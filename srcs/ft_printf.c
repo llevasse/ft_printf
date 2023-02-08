@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/26 12:11:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:47:34 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ int	ft_printf(const char *string, ...)
 
 void	print_var(char c, va_list args, int *sum)
 {
-	char	*base;
+	unsigned long long	address;
 
-	base = "0123456789abcdef";
 	if (c == '%')
 		return (ft_putchar('%', sum));
 	else if (c == 'c')
@@ -59,8 +58,11 @@ void	print_var(char c, va_list args, int *sum)
 		return (ft_putnbr_base(va_arg(args, int), "0123456789ABCDEF", sum));
 	else if (c == 'p')
 	{
+		address = va_arg(args, unsigned long long);
+		if (!address)
+			return (ft_putstr("(nil)", sum));
 		ft_putstr("0x", sum);
-		ft_putnbr_base_u(va_arg(args, unsigned long long), base, sum);
+		ft_putnbr_base_u(address, "0123456789abcdef", sum);
 	}
 }
 
