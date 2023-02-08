@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:49:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/05 11:19:29 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:07:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,17 @@ void	print_minus(const char *str, va_list args, int *sum)
 	int	prec;
 
 	prec = 0;
+	if (*str == '-')
+	{
+		while (*str == '-')
+			str++;
+		str--;
+	}
 	while (!ft_isdigit(*str) && !is_specifier(*str, 2))
 		str++;
+	min = ft_atoi(str);
+	if (min < 0)
+		return (print_field_width(str, args, sum));
 	min = *sum + ft_atoi(str);
 	while (!is_specifier(*str, 0))
 	{

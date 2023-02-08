@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:28:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/08 16:07:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:52:57 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	print_field_width(const char *str, va_list args, int *sum)
 	int		len;
 
 	width = ft_atoi(str);
+	if (width < 0)
+		return (print_minus((str + 1), args, sum));
 	if (*str == '*')
 		width = va_arg(args, int);
 	while (!is_specifier(*str, 0))
@@ -109,9 +111,9 @@ int	predict_length_precision(const char *str, va_list args, int prec)
 	}
 	if (ft_is_in_str("diuxX", *str))
 	{
-		if (ft_is_in_str("dixX", *str) \
+		if (ft_is_in_str("di", *str) \
 		&& va_arg(args_cp, int) < 0 \
-		&& prec > var_len)
+		&& prec >= var_len)
 			prec++;
 		if (prec > var_len)
 			var_len = prec;
