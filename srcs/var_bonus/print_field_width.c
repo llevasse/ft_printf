@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:28:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/08 14:41:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:07:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	print_field_width(const char *str, va_list args, int *sum)
 	len = predict_len(str, args);
 	if (is_neg(str, args) == 1)
 		ft_putchar('-', sum);
+	if (len > 1 && get_spec(str) == 'p')
+		len += 2;
+	if (len == 1 && get_spec(str) == 'p')
+		len = 5;
 	while (width-- > len)
 	{
 		if (get_para(str) != '0')
@@ -63,8 +67,8 @@ void	print_width_prec(const char *str, va_list args, int width, int *sum)
 
 int	is_neg(const char *str, va_list args)
 {
-	long long	int_to_print;
-	va_list		args_cp;
+	long long			int_to_print;
+	va_list				args_cp;
 
 	va_copy(args_cp, args);
 	if (ft_is_in_str("dixXu", get_spec(str)))
