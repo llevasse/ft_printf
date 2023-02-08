@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:28:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/06 17:05:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:33:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,8 @@ void	print_width_prec(const char *str, va_list args, int width, int *sum)
 	int		spec;
 
 	prec = ft_atoi(str);
-	spec = get_para(str);
-	if (spec != '0')
-		spec = ' ';
-	if (get_para(str) == '0' && ft_is_in_str("di", get_spec(str)))
-		width -= is_neg(str, args);
+	spec = ' ';
 	i = predict_length_precision(str, args, prec);
-	if (is_neg(str, args) == 1)
-		ft_putchar('-', sum);
 	while (width > i++)
 		ft_putchar(spec, sum);
 	i = 0;
