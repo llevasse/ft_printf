@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:44:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/08 14:33:14 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:43:06 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,20 @@ int	print_odd(const char *str, va_list args, int *sum, int *padding)
 		int_to_print = va_arg(args_cp, int);
 		if (int_to_print < 0)
 		{
+			if (get_para(str) == '0' && !has_prec(str))
+				(*padding)--;
 			var_len--;
 			ft_putchar('-', sum);
 			int_to_print *= -1;
 		}
+		if (int_to_print == 0 && get_para(str) == '0' && !has_prec(str))
+			var_len--;
+	}
+	if (ft_is_in_str("xXu", *str))
+	{
+		int_to_print = va_arg(args_cp, long long);
+		if (int_to_print == 0 && get_para(str) == '0' && !has_prec(str))
+			var_len--;
 	}
 	return (var_len);
 }
