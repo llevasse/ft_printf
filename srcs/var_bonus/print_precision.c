@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:53:50 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/06 15:57:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:29:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	print_prec(const char *str, va_list args, int *sum)
 	{
 		str++;
 		i++;
-		if (ft_is_in_str("diuxX", *str))
-			return (print_padding((str - i), args, '0', sum));
 	}
+	if (ft_is_in_str("diuxX", *str))
+		return (print_padding((str - i), args, '0', sum));
 	if (*str == 's' && prec > 0)
 	{
 		i = 0;

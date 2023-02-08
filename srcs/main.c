@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 11:06:02 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/08 17:03:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:39:38 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ int	main(int argc, char *argv[])
 	char	*varstr;
 
 
-	s = "%---91.148s";
+	s = "32 This is an int : %0d\n\n";
 	varstr = NULL;
-	var = -1355834522;
+	var = 0;
 	(void)s;
 	(void)var;	
 	(void)varstr;
 	ft_printf("\n\n\n\n\n\n\n\n\n\n");
 	
 	ft_printf("\ntest for %s |", s);
-	i = ft_printf(s,"\nmD^8<.q*'\rD");
+	i = ft_printf(s, var);
 	ft_printf("| (ft_printf : %i)\n", i);
 	printf("test for %s |", s);
-	i = printf(s, "\nmD^8<.q*'\rD");
+	i = printf(s, var);
 	printf("| (printf : %i)\n", i);
 
 	return (0);

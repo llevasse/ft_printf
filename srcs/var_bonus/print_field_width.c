@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:28:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/08 16:52:57 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:37:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ void	print_field_width(const char *str, va_list args, int *sum)
 	int		width;
 	int		len;
 
+	if (*str == '-')
+	{
+		while (*str == '-')
+			str++;
+		str--;
+	}
 	width = ft_atoi(str);
 	if (width < 0)
 		return (print_minus((str + 1), args, sum));
@@ -65,6 +71,8 @@ void	print_width_prec(const char *str, va_list args, int width, int *sum)
 		print_padding((str - i), args, '0', sum);
 	if (*str == 's')
 		print_width_prec_s(va_arg(args, char *), prec, sum);
+	if (*str == 'c')
+		ft_putchar(va_arg(args, int), sum);
 }
 
 int	is_neg(const char *str, va_list args)
@@ -119,6 +127,8 @@ int	predict_length_precision(const char *str, va_list args, int prec)
 			var_len = prec;
 		return (var_len);
 	}
+	if (*str == 'c')
+		return (1);
 	if (var_len < prec)
 		return (var_len);
 	return (prec);
