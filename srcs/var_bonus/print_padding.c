@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:44:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/09 15:15:15 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:12:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_padding(const char *str, va_list args, char c, int *sum)
 	while (padding_len-- - var_len > 0)
 		ft_putchar(c, sum);
 	if (is_neg(str, args) == 2)
-		return ;
+		return ((void)va_arg(args, int));
 	if (!ft_is_in_str("di", *str))
 		return (print_var(str, args, sum));
 	int_to_print = va_arg(args, int);
