@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_space.c                                      :+:      :+:    :+:   */
+/*   field_width_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 10:18:02 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/09 15:06:09 by llevasse         ###   ########.fr       */
+/*   Created: 2023/02/09 14:28:41 by llevasse          #+#    #+#             */
+/*   Updated: 2023/02/09 14:41:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf_bonus.h"
 
-void	print_space(const char *str, va_list args, int *sum)
+void	skip_minus(const char **str)
 {
-	int		var;
-	char	*str_to_print;
+	if (**str == '-')
+	{	
+		while (**str == '-')
+			(*str)++;
+		(*str)--;
+	}
+}
 
-	while (*str && !is_specifier(*str, 0))
-		str++;
-	if (*str == 'i' || *str == 'd')
+void	print_width_filling(const char *str, va_list args, int width, int *sum)
+{
+	int	len;
+
+	len = predict_len(str, args);
+	if (len > 1 && get_spec(str) == 'p')
+		len += 2;
+	if (len == 1 && get_spec(str) == 'p')
+		len = 5;
+	while (width-- > len)
 	{
-		var = va_arg(args, int);
-		if (var >= 0)
+		if (get_para(str) != '0')
 			ft_putchar(' ', sum);
-		return (ft_putnbr(var, 0, sum));
+		else
+			ft_putchar('0', sum);
 	}
-	if (*str == 's')
-	{
-		str_to_print = va_arg(args, char *);
-		if (!*str_to_print)
-			return ;
-		return (ft_putstr(str_to_print, sum));
-	}
-	print_var(str, args, sum);
 }

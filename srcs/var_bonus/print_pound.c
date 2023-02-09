@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:37:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/01/28 16:00:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:05:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_pound(const char *str, va_list args, int *sum)
 {
 	int	nbr;
 
-	while (!is_specifier(*str, 0))
+	while (*str && !is_specifier(*str, 0))
 		str++;
 	if (*str == 'x')
 	{	

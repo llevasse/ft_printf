@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:28:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/08 17:37:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:42:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 void	print_field_width(const char *str, va_list args, int *sum)
 {
 	int		width;
-	int		len;
 
-	if (*str == '-')
-	{
-		while (*str == '-')
-			str++;
-		str--;
-	}
+	skip_minus(&str);
 	width = ft_atoi(str);
 	if (width < 0)
 		return (print_minus((str + 1), args, sum));
@@ -33,20 +27,9 @@ void	print_field_width(const char *str, va_list args, int *sum)
 		if (*str++ == '.')
 			return (print_width_prec(str, args, width, sum));
 	}
-	len = predict_len(str, args);
 	if (is_neg(str, args) == 1)
 		ft_putchar('-', sum);
-	if (len > 1 && get_spec(str) == 'p')
-		len += 2;
-	if (len == 1 && get_spec(str) == 'p')
-		len = 5;
-	while (width-- > len)
-	{
-		if (get_para(str) != '0')
-			ft_putchar(' ', sum);
-		else
-			ft_putchar('0', sum);
-	}
+	print_width_filling(str, args, width, sum);
 	print_var(str, args, sum);
 }
 
@@ -62,16 +45,11 @@ void	print_width_prec(const char *str, va_list args, int width, int *sum)
 	while (width > i++)
 		ft_putchar(spec, sum);
 	i = 0;
-	while (!is_specifier(*str, 0))
-	{
-		str++;
-		i++;
-	}
-	if (ft_is_in_str("diuxX", *str))
-		print_padding((str - i), args, '0', sum);
-	if (*str == 's')
+	if (ft_is_in_str("diuxX", get_spec(str)))
+		print_padding(str, args, '0', sum);
+	if (get_spec(str) == 's')
 		print_width_prec_s(va_arg(args, char *), prec, sum);
-	if (*str == 'c')
+	if (get_spec(str) == 'c')
 		ft_putchar(va_arg(args, int), sum);
 }
 
@@ -101,35 +79,4 @@ void	print_width_prec_s(char *str_to_print, int prec, int *sum)
 		str_to_print = "(null)";
 	while (prec-- > 0 && str_to_print && *str_to_print)
 		ft_putchar(*str_to_print++, sum);
-}
-
-int	predict_length_precision(const char *str, va_list args, int prec)
-{
-	int			var_len;
-	va_list		args_cp;
-
-	while (!is_specifier(*str, 0))
-		str++;
-	va_copy(args_cp, args);
-	var_len = predict_len(str, args);
-	if (*str == 's')
-	{
-		if (!(va_arg(args_cp, char *)) && prec < 6)
-			var_len = 0;
-	}
-	if (ft_is_in_str("diuxX", *str))
-	{
-		if (ft_is_in_str("di", *str) \
-		&& va_arg(args_cp, int) < 0 \
-		&& prec >= var_len)
-			prec++;
-		if (prec > var_len)
-			var_len = prec;
-		return (var_len);
-	}
-	if (*str == 'c')
-		return (1);
-	if (var_len < prec)
-		return (var_len);
-	return (prec);
 }

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:39:11 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/06 16:58:11 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:13:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	print_pound(const char *str, va_list args, int *sum);
 void	print_minus(const char *str, va_list args, int *sum);
 
 void	print_padding(const char *str, va_list args, char c, int *sum);
+int		odd_nbr(const char *str, va_list args_cp, int *padding, int *sum);
 int		get_para(const char *str);
 int		get_spec(const char *str);
 int		has_prec(const char *str);
@@ -48,7 +49,7 @@ void	print_plus(const char *str, va_list args, int *sum);
 
 void	print_field_width(const char *str, va_list args, int *sum);
 void	print_width_prec(const char *str, va_list args, int width, int *sum);
-int		is_neg (const char *str, va_list args);
+int		is_neg(const char *str, va_list args);
 int		predict_length_precision(const char *str, va_list args, int prec);
 void	print_width_prec_s(char *str_to_print, int prec, int *sum);
 
@@ -60,5 +61,11 @@ int		get_unsigned_len(unsigned int n);
 int		print_odd(const char *str, va_list args, int *sum, int *padding);
 
 int		check_priorities(const char *str, va_list args, int *sum);
+int		priorities_zero(const char *str, va_list args, int *sum);
+
+void	skip_to_spec(const char **str);
+
+void	skip_minus(const char **str);
+void	print_width_filling(const char *str, va_list args, int width, int *sum);
 
 #endif

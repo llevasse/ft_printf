@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:44:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/08 17:47:59 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:15:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_padding(const char *str, va_list args, char c, int *sum)
 	int			padding_len;
 
 	padding_len = ft_atoi(str);
-	while (!is_specifier(*str, 0))
+	while (*str && !is_specifier(*str, 0))
 		str++;
 	var_len = print_odd(str, args, sum, &padding_len);
 	if (padding_len == 0 && is_neg(str, args) == 2 && get_para(str) == '0')
@@ -44,7 +44,6 @@ int	print_odd(const char *str, va_list args, int *sum, int *padding)
 {
 	va_list	args_cp;
 	int		var_len;
-	int		int_to_print;
 
 	va_copy(args_cp, args);
 	var_len = predict_len(str, args);
@@ -53,6 +52,16 @@ int	print_odd(const char *str, va_list args, int *sum, int *padding)
 		*padding -= 2;
 		ft_putstr("0x", sum);
 	}
+	var_len = odd_nbr(str, args_cp, padding, sum);
+	return (var_len);
+}
+
+int	odd_nbr(const char *str, va_list args_cp, int *padding, int *sum)
+{
+	int	int_to_print;
+	int	var_len;
+
+	var_len = predict_len(str, args_cp);
 	if (*str == 'd' || *str == 'i')
 	{
 		int_to_print = va_arg(args_cp, int);
@@ -74,34 +83,4 @@ int	print_odd(const char *str, va_list args, int *sum, int *padding)
 			var_len--;
 	}
 	return (var_len);
-}
-
-int	get_para(const char *str)
-{
-	int	spec;
-
-	spec = 0;
-	while (*(str - spec) != '%')
-		spec++;
-	return (*(str - (spec - 1)));
-}
-
-int	has_prec(const char *str)
-{
-	while (*str != '%')
-		str--;
-	str++;
-	while (!is_specifier(*str, 0))
-	{
-		if (*str++ == '.')
-			return (1);
-	}
-	return (0);
-}
-
-int	get_spec(const char *str)
-{
-	while (!(is_specifier(*str, 0)) && *str)
-		str++;
-	return (*str);
 }

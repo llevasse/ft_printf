@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:53:50 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/08 17:29:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:06:03 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ void	print_prec(const char *str, va_list args, int *sum)
 
 	i = 0;
 	prec = ft_atoi(str);
-	while (!is_specifier(*str, 0))
-	{
-		str++;
+	while (!is_specifier(*(str + i), 0))
 		i++;
-	}
-	if (ft_is_in_str("diuxX", *str))
-		return (print_padding((str - i), args, '0', sum));
+	if (ft_is_in_str("diuxX", *(str + i)))
+		return (print_padding(str, args, '0', sum));
+	str += i;
 	if (*str == 's' && prec > 0)
 	{
 		i = 0;
@@ -49,7 +47,7 @@ void	print_padding_prec(const char *str, va_list args, char c, int *sum)
 	int		padding_len;
 
 	padding_len = ft_atoi(str);
-	while (!is_specifier(*str, 0))
+	while (*str && !is_specifier(*str, 0))
 		str++;
 	var_len = print_odd_prec(str, args, sum);
 	while (padding_len-- - var_len > 0)
@@ -81,4 +79,32 @@ int	print_odd_prec(const char *str, va_list args, int *sum)
 		}
 	}
 	return (var_len);
+}
+
+int	predict_length_precision(const char *str, va_list args, int prec)
+{
+	int			var_len;
+	va_list		args_cp;
+
+	while (*str && !is_specifier(*str, 0))
+		str++;
+	va_copy(args_cp, args);
+	var_len = predict_len(str, args);
+	if (*str == 's')
+	{
+		if (!(va_arg(args_cp, char *)) && prec < 6)
+			var_len = 0;
+	}
+	if (ft_is_in_str("diuxX", *str))
+	{
+		if (ft_is_in_str("di", *str) \
+		&& va_arg(args_cp, int) < 0 && prec >= var_len)
+			prec++;
+		if (prec > var_len)
+			var_len = prec;
+		return (var_len);
+	}
+	if (var_len < prec || *str == 'c')
+		return (var_len);
+	return (prec);
 }
