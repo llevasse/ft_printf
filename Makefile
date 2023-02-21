@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/02/09 15:15:34 by llevasse         ###   ########.fr        #
+#    Updated: 2023/02/21 16:13:57 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,10 +66,6 @@ LIBFT_FILES	= 	libft/ft_atoi.c \
 				libft/ft_strdup.c \
 				libft/ft_is_in_str.c \
 
-MAIN_FILE	= 	srcs/main.c
-
-EXECUTABLE	:= main
-
 OBJS		= ${FILES:.c=.o}
 
 LIBFT_OBJS	= ${LIBFT_FILES:.c=.o}
@@ -91,7 +87,6 @@ bonus:		fclean ${OBJS_BONUS}
 
 all:		${NAME}
 
-
 clean:
 				rm -f ${OBJS} ${OBJS_BONUS} ${LIBFT_OBJS}
 
@@ -99,17 +94,5 @@ fclean:		clean
 				rm -f ${NAME}
 
 re:			fclean all
-
-alldebug:	bin/$(EXECUTABLE)
-
-run: cleandebug alldebug
-	clear
-	./bin/$(EXECUTABLE)
-
-bin/$(EXECUTABLE): ${BONUS_FILES} ${MAIN_FILE} ${LIBFT_FILES}
-	gcc -ggdb -fsanitize=address ${FLAGS} $^ -o $@ 
-
-cleandebug:
-	-rm bin/*
 
 .PHONY:		all	clean	fclean	re bonus
