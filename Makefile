@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/03/03 10:31:34 by llevasse         ###   ########.fr        #
+#    Updated: 2023/03/03 10:36:09 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,19 +15,19 @@ FLAGS		=	-Wall -Wextra -Werror
 FILES		= 	srcs/ft_printf.c \
 				srcs/ft_printf_utils.c 
 
-BONUS_FILES	= 	srcs/ft_printf_bonus.c						\
-				srcs/ft_printf_utils_bonus.c				\
-				srcs/var_bonus/predict_bonus.c				\
-				srcs/var_bonus/print_minus_bonus.c			\
-				srcs/var_bonus/print_pound_bonus.c			\
-				srcs/var_bonus/print_padding_bonus.c		\
-				srcs/var_bonus/print_precision_bonus.c		\
-				srcs/var_bonus/print_space_bonus.c			\
-				srcs/var_bonus/print_plus_bonus.c			\
-				srcs/var_bonus/priorities_bonus.c			\
-				srcs/var_bonus/print_field_width_bonus.c	\
-				srcs/var_bonus/field_width_utils_bonus.c	\
-				srcs/var_bonus/get_details_bonus.c			\
+BONUS_FILES	= 	srcs/ft_printf_bonus.c					\
+				srcs/ft_printf_utils_bonus.c			\
+				srcs/var_bonus/predict.c				\
+				srcs/var_bonus/print_minus.c			\
+				srcs/var_bonus/print_pound.c			\
+				srcs/var_bonus/print_padding.c			\
+				srcs/var_bonus/print_precision.c		\
+				srcs/var_bonus/print_space.c			\
+				srcs/var_bonus/print_plus.c				\
+				srcs/var_bonus/priorities.c				\
+				srcs/var_bonus/print_field_width.c		\
+				srcs/var_bonus/field_width_utils.c		\
+				srcs/var_bonus/get_details.c			\
 				
 OBJS		= ${FILES:.c=.o}
 
