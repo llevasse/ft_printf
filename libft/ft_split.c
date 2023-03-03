@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:08:31 by llevasse          #+#    #+#             */
-/*   Updated: 2022/12/09 13:32:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:32:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,24 +105,3 @@ char	**ft_split(char const *s, char c)
 	res[index_word] = NULL;
 	return (res);
 }
-
-/* #include <stdio.h>
-#include <malloc/malloc.h>
-int main()
-{
-	char **tab;
-	unsigned long sizetab;
-
-	void * p2 = malloc(sizeof(char *) * 2);
-	tab = ft_split("chinimala", ' ');
-	sizetab = sizeof(tab);
-	printf("size tab : %lu\n", malloc_size(tab));
-	printf("expected size : %lu\nTAB :\n", malloc_size(p2));
-	int i = 0;
-	while (tab[i] != NULL)
-	{
-		printf("%s\n",tab[i]);
-		i++;
-	}
-	printf("%s\n",tab[i]);
-} */
