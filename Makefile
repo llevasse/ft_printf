@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/03/03 10:36:09 by llevasse         ###   ########.fr        #
+#    Updated: 2023/04/21 13:38:18 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,34 +28,36 @@ BONUS_FILES	= 	srcs/ft_printf_bonus.c					\
 				srcs/var_bonus/print_field_width.c		\
 				srcs/var_bonus/field_width_utils.c		\
 				srcs/var_bonus/get_details.c			\
-				
+
 OBJS		= ${FILES:.c=.o}
 
 OBJS_BONUS	= ${BONUS_FILES:.c=.o}
 
 NAME		= libftprintf.a
 
-%.o: %.c
-				gcc ${FLAGS} -I includes -c $< -o ${<:.c=.o}
-
-${NAME}:	${OBJS} includes/ft_printf.h Makefile
-				make -C libft
-				ar rcs ${NAME} libft/libft.a ${OBJS}
-
-bonus:		${OBJS_BONUS} includes/ft_printf_bonus.h Makefile
-				make -C libft
-				ar rcs ${NAME} libft/libft.a ${OBJS_BONUS}
+%.o: %.c includes/ft_printf.h Makefile
+			cc ${FLAGS} -I ./includes -c $< -o $@
 
 all:		${NAME}
 
+${NAME}:		${OBJS}
+				make -C ./libft
+				mv libft/libft.a $@
+				ar rcs $@ $^
+
 clean:
-				make -C libft clean
+				make -C ./libft clean
 				rm -f ${OBJS} ${OBJS_BONUS}
 
 fclean:		clean
-				rm -f libft/libft.a
+				make -C ./libft fclean
 				rm -f ${NAME}
 
 re:			fclean all
+
+bonus:		${OBJS_BONUS}
+				make -C ./libft
+				mv libft/libft.a ${NAME}
+				ar rcs ${NAME} $^
 
 .PHONY:		all	clean	fclean	re bonus
