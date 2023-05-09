@@ -6,16 +6,16 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/04/21 13:38:18 by llevasse         ###   ########.fr        #
+#    Updated: 2023/05/09 17:15:58 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		:=	-Wall -Wextra -Werror
 
-FILES		= 	srcs/ft_printf.c \
+FILES		:= 	srcs/ft_printf.c \
 				srcs/ft_printf_utils.c 
 
-BONUS_FILES	= 	srcs/ft_printf_bonus.c					\
+BONUS_FILES	:= 	srcs/ft_printf_bonus.c					\
 				srcs/ft_printf_utils_bonus.c			\
 				srcs/var_bonus/predict.c				\
 				srcs/var_bonus/print_minus.c			\
@@ -29,35 +29,35 @@ BONUS_FILES	= 	srcs/ft_printf_bonus.c					\
 				srcs/var_bonus/field_width_utils.c		\
 				srcs/var_bonus/get_details.c			\
 
-OBJS		= ${FILES:.c=.o}
+LIBFT		:=	libft/libft.a
 
-OBJS_BONUS	= ${BONUS_FILES:.c=.o}
+OBJS		:=	${FILES:.c=.o}
 
-NAME		= libftprintf.a
+OBJS_BONUS	:=	${BONUS_FILES:.c=.o}
 
-%.o: %.c includes/ft_printf.h Makefile
-			cc ${FLAGS} -I ./includes -c $< -o $@
+NAME		:=	libftprintf.a
 
-all:		${NAME}
+all:			${NAME} ${LIBFT}
+
+%.o:%.c includes/ft_printf.h Makefile ${LIBFT}
+				cc ${FLAGS} -I ./includes -c $< -o $@
 
 ${NAME}:		${OBJS}
-				make -C ./libft
-				mv libft/libft.a $@
-				ar rcs $@ $^
+				ar rcs $@ ${LIBFT} ${OBJS}
 
-clean:
-				make -C ./libft clean
-				rm -f ${OBJS} ${OBJS_BONUS}
+${LIBFT}::
+				git submodule update --init --recursive
+				make -C ./libft
+
+clean::
+				rm -rf ${OBJS} ${OBJS_BONUS} libft/*.o 
 
 fclean:		clean
-				make -C ./libft fclean
-				rm -f ${NAME}
+				rm -rf ${NAME} libft
 
-re:			fclean all
+re:		fclean all
 
 bonus:		${OBJS_BONUS}
-				make -C ./libft
-				mv libft/libft.a ${NAME}
-				ar rcs ${NAME} $^
+				ar rcs ${NAME} ${LIBFT} $^
 
 .PHONY:		all	clean	fclean	re bonus
