@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/05/09 17:15:58 by llevasse         ###   ########.fr        #
+#    Updated: 2023/05/11 14:57:59 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ all:			${NAME} ${LIBFT}
 				cc ${FLAGS} -I ./includes -c $< -o $@
 
 ${NAME}:		${OBJS}
-				ar rcs $@ ${LIBFT} ${OBJS}
+				cp libft/libft.a $@
+				ar rcs $@ ${OBJS}
 
 ${LIBFT}::
 				git submodule update --init --recursive

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/08 15:47:34 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:26:49 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	ft_printf(const char *string, ...)
 		if (*string == '%')
 		{
 			string++;
-			print_var(*string, args, &i);
+			if (*string)
+				print_var(*string, args, &i);
+			else
+				i = -1;
 		}
 		if (*string)
 			string++;
@@ -64,6 +67,7 @@ void	print_var(char c, va_list args, int *sum)
 		ft_putstr("0x", sum);
 		ft_putnbr_base_u(address, "0123456789abcdef", sum);
 	}
+	return ((void)(ft_putchar('%', sum), ft_putchar(c, sum)));
 }
 
 int	is_specifier(char c)
