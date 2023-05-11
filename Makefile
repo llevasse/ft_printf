@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/05/11 14:57:59 by llevasse         ###   ########.fr        #
+#    Updated: 2023/05/11 16:54:32 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,10 @@ all:			${NAME} ${LIBFT}
 
 ${NAME}:		${OBJS}
 				cp libft/libft.a $@
-				ar rcs $@ ${OBJS}
+				ar rcs $@ $^
 
 ${LIBFT}::
-				git submodule update --init --recursive
+				git submodule update --init --recursive --remote --merge
 				make -C ./libft
 
 clean::
@@ -59,6 +59,9 @@ fclean:		clean
 re:		fclean all
 
 bonus:		${OBJS_BONUS}
-				ar rcs ${NAME} ${LIBFT} $^
+				cp libft/libft.a ${NAME}
+				ar rcs ${NAME} $^
+
+re_bonus:	fclean bonus
 
 .PHONY:		all	clean	fclean	re bonus

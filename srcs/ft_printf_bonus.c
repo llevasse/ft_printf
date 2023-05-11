@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/09 15:07:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:35:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_printf(const char *string, ...)
 {
-	va_list		args;
-	int			i;
+	va_list	args;
+	int		i;
 
 	va_start(args, string);
 	i = 0;
@@ -26,18 +26,19 @@ int	ft_printf(const char *string, ...)
 		if (*string == '%')
 		{
 			string++;
-			if (is_specifier(*string, 1))
+			if (is_specifier(*string, 1) && *string)
 				print_var_bonus(string, args, &i);
-			else
+			else if (*string)
 				print_var(string, args, &i);
-			while (!is_specifier(*string, 0))
+			if (!*string)
+				i = -1;
+			while (is_specifier(*string, 1) && *string)
 				string++;
 		}
 		if (*string)
 			string++;
 	}
-	va_end(args);
-	return (i);
+	return (va_end(args), i);
 }
 
 void	print_var(const char *str, va_list args, int *sum)
@@ -66,6 +67,7 @@ void	print_var(const char *str, va_list args, int *sum)
 		ft_putstr("0x", sum);
 		ft_putnbr_base_u(address, "0123456789abcdef", sum);
 	}
+	return ((void)(ft_putchar('%', sum), ft_putchar(*str, sum)));
 }
 
 void	print_var_bonus(const char *str, va_list args, int *sum)
@@ -86,6 +88,7 @@ void	print_var_bonus(const char *str, va_list args, int *sum)
 		return (print_prec((str + 1), args, sum));
 	if (*str == '+')
 		return (print_plus(str, args, sum));
+	return ((void)(ft_putchar('%', sum), ft_putchar(*str, sum)));
 }
 
 int	is_specifier(char c, int bonus)
