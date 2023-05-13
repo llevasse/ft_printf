@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:33:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/05/11 17:35:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/05/13 20:17:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	print_var(const char *str, va_list args, int *sum)
 		if (!address)
 			return (ft_putstr("(nil)", sum));
 		ft_putstr("0x", sum);
-		ft_putnbr_base_u(address, "0123456789abcdef", sum);
+		return (ft_putnbr_base_u(address, "0123456789abcdef", sum));
 	}
 	return ((void)(ft_putchar('%', sum), ft_putchar(*str, sum)));
 }
