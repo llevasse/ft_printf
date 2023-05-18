@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/06 15:18:30 by llevasse          #+#    #+#              #
-#    Updated: 2023/05/11 16:54:32 by llevasse         ###   ########.fr        #
+#    Updated: 2023/05/18 11:33:35 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,14 +47,13 @@ ${NAME}:		${OBJS}
 				ar rcs $@ $^
 
 ${LIBFT}::
-				git submodule update --init --recursive --remote --merge
 				make -C ./libft
 
 clean::
 				rm -rf ${OBJS} ${OBJS_BONUS} libft/*.o 
 
 fclean:		clean
-				rm -rf ${NAME} libft
+				rm -rf ${NAME}
 
 re:		fclean all
 
