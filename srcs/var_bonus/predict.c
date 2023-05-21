@@ -21,8 +21,6 @@ int	predict_len(const char *str, va_list args)
 	va_copy(args_cp, args);
 	if (*str == 'c' || *str == '%')
 		return (1);
-	if (*str == 's')
-		return (ft_strlen(va_arg(args_cp, char *)));
 	if (ft_is_in_str("diuxX", *str) && is_neg(str, args) == 2 && has_prec(str))
 		return (0);
 	if (*str == 'd' || *str == 'i')
@@ -33,7 +31,12 @@ int	predict_len(const char *str, va_list args)
 		return (get_size_base(va_arg(args_cp, int), base));
 	if (*str == 'p')
 		return (get_size_base_u(va_arg(args_cp, unsigned long long), base));
-	return (0);
+	if (*str != 's')
+		return (0);
+	base = va_arg(args_cp, char *);
+	if (base)
+		return (ft_strlen(base));
+	return (6);
 }
 
 int	get_size_base(int n, const char *base)

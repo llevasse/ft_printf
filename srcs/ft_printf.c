@@ -17,15 +17,14 @@ int	ft_printf(const char *string, ...)
 	va_list		args;
 	int			i;
 
+	if (!string)
+		return (-1);
 	va_start(args, string);
 	i = 0;
 	while (*string && i != -1)
 	{
 		while (*string != '%' && *string)
-		{
-			ft_putchar(*string, &i);
-			string++;
-		}
+			ft_putchar(*string++, &i);
 		if (*string == '%')
 		{
 			string++;
@@ -37,8 +36,7 @@ int	ft_printf(const char *string, ...)
 		if (*string)
 			string++;
 	}
-	va_end(args);
-	return (i);
+	return (va_end(args), i);
 }
 
 void	print_var(char c, va_list args, int *sum)

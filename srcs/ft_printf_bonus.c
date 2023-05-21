@@ -17,6 +17,8 @@ int	ft_printf(const char *string, ...)
 	va_list	args;
 	int		i;
 
+	if (!string)
+		return (-1);
 	va_start(args, string);
 	i = 0;
 	while (*string && i != -1)
@@ -26,11 +28,9 @@ int	ft_printf(const char *string, ...)
 		if (*string == '%')
 		{
 			string++;
-			if (is_specifier(*string, 1) && *string)
+			if (*string)
 				print_var_bonus(string, args, &i);
-			else if (*string)
-				print_var(string, args, &i);
-			if (!*string)
+			else
 				i = -1;
 			while (is_specifier(*string, 1) && *string)
 				string++;
@@ -88,7 +88,7 @@ void	print_var_bonus(const char *str, va_list args, int *sum)
 		return (print_prec((str + 1), args, sum));
 	if (*str == '+')
 		return (print_plus(str, args, sum));
-	return ((void)(ft_putchar('%', sum), ft_putchar(*str, sum)));
+	print_var(str, args, sum);
 }
 
 int	is_specifier(char c, int bonus)

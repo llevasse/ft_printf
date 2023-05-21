@@ -29,7 +29,7 @@ void	print_prec(const char *str, va_list args, int *sum)
 	{
 		i = 0;
 		str_to_print = va_arg(args, char *);
-		if (!str_to_print && (size_t)prec < ft_strlen(str_to_print))
+		if (!str_to_print && (size_t)prec < ft_strlen("(null)"))
 			return ;
 		else if (!str_to_print)
 			str_to_print = "(null)";
