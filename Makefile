@@ -12,6 +12,8 @@
 
 FLAGS		:=	-Wall -Wextra -Werror
 
+CC			:= cc
+
 FILES		:= 	srcs/ft_printf.c \
 				srcs/ft_printf_utils.c 
 
@@ -40,7 +42,7 @@ NAME		:=	libftprintf.a
 all:			${NAME} ${LIBFT}
 
 %.o:%.c includes/ft_printf.h Makefile ${LIBFT}
-				cc ${FLAGS} -I ./includes -c $< -o $@
+				${CC} ${FLAGS} -I ./includes -c $< -o $@
 
 ${NAME}:		${OBJS}
 				cp libft/libft.a $@
